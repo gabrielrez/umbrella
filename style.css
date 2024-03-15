@@ -33,7 +33,7 @@ button {
 .grid-container {
   height: 100vh;
   display: flex;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
 }
 
 .autentication {
@@ -57,7 +57,8 @@ button {
 .option-box {
   margin-top: 64px;
   border: 2px solid var(--cor2);
-  padding: 12px 64px;
+  padding: 12px 0px;
+  width: 200px;
   font-size: 1.125rem;
   font-weight: 600;
   line-height: 1;
@@ -66,8 +67,10 @@ button {
   transition: 0.2s ease;
 }
 
-.option-box:hover {
-  transform: translateY(-4px);
+@media(min-width: 500px) {
+  .option-box:hover {
+    transform: translateY(-4px);
+  }
 }
 
 .active {
@@ -121,4 +124,71 @@ button {
 .link-autentication a {
   color: var(--cor1);
   font-weight: 500;
+}
+
+@media(max-width: 1024px) {
+  .main-img {
+    display: none;
+  }
+}
+
+@media(max-width: 500px) {
+  .grid-container {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .autentication-tittle {
+    font-size: 3.5rem;
+    margin-bottom: 32px;
+  }
+
+  .options {
+    display: block;
+  }
+
+  .option-box {
+    display: block;
+    width: 340px;
+    margin-top: 8px;
+  }
+
+  .autentication-form {
+    margin-top: 8px;
+  }
+
+  .autentication-btn {
+    margin-top: 20px;
+  }
+}
+
+@media(max-width: 380px) {
+  .autentication-tittle {
+    font-size: 3rem;
+  }
+
+  .autentication-form input {
+    width: 280px;
+  }
+
+  .option-box {
+    width: 280px;
+  }
+}
+
+@media(max-width: 300px) {
+  .autentication-tittle {
+    font-size: 2.5rem;
+  }
+
+  .autentication-form input {
+    width: 250px;
+  }
+
+  .option-box {
+    width: 250px;
+  }
+
+  .autentication-btn {
+    width: 250px;
+  }
 }
