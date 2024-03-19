@@ -80,3 +80,24 @@
     font-size: 1.5rem;
   }
 }
+
+@media(min-width: 1200px) {
+  .home {
+    margin-top: 80px;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    padding: 20px;
+    position: relative;
+  }
+
+  .home-img {
+    position: absolute;
+    right: -60px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}
