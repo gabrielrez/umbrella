@@ -16,7 +16,7 @@
 .faq-title::after {
   content: "";
   width: 160px;
-  height: 2px;
+  height: 4px;
   background-color: var(--cBase01);
   display: block;
   margin-left: auto;
