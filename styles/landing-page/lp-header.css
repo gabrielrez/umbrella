@@ -31,7 +31,7 @@
   transform: translateY(-4px);
 }
 
-.menu-mobile {
+.login-mobile {
   background-color: var(--cBase01);
   border: none;
   padding: 8px 16px;
@@ -41,15 +41,6 @@
   align-items: center;
   gap: 8px;
   cursor: pointer;
-}
-
-.menu-mobile::before {
-  content: "";
-  display: inline-block;
-  height: 2px;
-  width: 12px;
-  background-color: var(--c01);
-  box-shadow: 0 4px var(--c01), 0 -4px var(--c01);
 }
 
 .nav-btn {
@@ -67,13 +58,13 @@
 }
 
 @media(min-width: 800px) {
-  .menu-mobile {
+  .login-mobile {
     display: none;
   }
 }
 
 @media(max-width: 800px) {
-  .menu-mobile {
+  .login-mobile {
     display: flex;
   }
 
