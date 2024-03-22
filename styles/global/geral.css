@@ -94,3 +94,8 @@ li {
 .detail-green {
   color: var(--cBase02);
 }
+
+button {
+  border: none;
+  cursor: pointer;
+}

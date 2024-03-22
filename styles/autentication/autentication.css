@@ -1,0 +1,88 @@
+@import "/styles/global/geral.css";
+
+body {
+  height: 100vh;
+  background: linear-gradient(var(--cBase03), var(--cBase01));
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+form {
+  margin-top: 32px;
+  width: 360px;
+  padding: 40px 20px;
+  background-color: var(--c01);
+  border-radius: 8px;
+}
+
+.input {
+  margin-top: 12px;
+}
+
+.input input {
+  margin-top: 4px;
+  width: 100%;
+  padding: 16px 10px;
+  background-color: var(--c01);
+  border-radius: 8px;
+  border: 1px solid #E7E6EB;
+}
+
+.login-btn {
+  padding: 16px 10px;
+  width: 100%;
+  margin-top: 32px;
+  background-color: var(--cBase01);
+  border-radius: 8px;
+  font-size: 1.125rem;
+  line-height: 1;
+  transition: 0.2s ease;
+}
+
+.login-btn:hover {
+  background-color: #7f16ab;
+}
+
+.form-link {
+  text-decoration: underline;
+  margin-top: 16px;
+}
+
+.autentication-img1,
+.autentication-img2 {
+  position: absolute;
+  z-index: -1;
+  opacity: 50%;
+}
+
+.autentication-img1 {
+  right: 120px;
+  top: 40px;
+}
+
+.autentication-img2 {
+  left: 120px;
+  bottom: 40px;
+}
+
+@media(max-width: 1000px) {
+
+  .autentication-img1,
+  .autentication-img2 {
+    display: none;
+  }
+}
+
+@media(max-width: 450px) {
+  form {
+    width: 300px;
+  }
+}
+
+@media(max-width: 350px) {
+  form {
+    width: 280px;
+  }
+}
