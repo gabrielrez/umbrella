@@ -64,9 +64,9 @@
   display: none;
 }
 
-.faq-container dd.active {
+.faq-container .accordion.active dd {
   display: flex;
-  animation: showFaq 0.5s ease;
+  animation: accordionAnimation 0.2s ease;
 }
 
 .faq-container dt.active:before {
@@ -74,7 +74,7 @@
   height: 8px;
 }
 
-@keyframes showFaq {
+@keyframes accordionAnimation {
   from {
     transform: translate3d(0, -16px, 0);
     opacity: 0;

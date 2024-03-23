@@ -1,14 +1,12 @@
-const faqQuestions = document.querySelectorAll(".faq-container div dt");
+const accordionList = document.querySelectorAll(".accordion");
+accordionList[0].classList.add("active");
+accordionList[0].querySelector("dt").classList.add("active");
 
-function handleFaqQuestions(){
-    faqQuestions.forEach((question)=>{
-      question.classList.remove("active");
-      question.nextElementSibling.classList.remove("active");
-    })
-    this.classList.add("active");
-    this.nextElementSibling.classList.add("active");
+function activeAccordion(){
+  this.classList.toggle("active");
+  this.querySelector("dt").classList.toggle("active");
 }
 
-faqQuestions.forEach((item)=>{
-    item.addEventListener("click", handleFaqQuestions);
-});
+accordionList.forEach((item)=>{
+  item.addEventListener("click", activeAccordion);
+})
