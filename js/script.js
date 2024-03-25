@@ -1,7 +1,8 @@
 import SmoothScroll from "./modules/landing-page/scroll.js";
-import initAccordion from "./modules/landing-page/accordion.js";
+import Accordion from "./modules/landing-page/accordion.js";
 
 const smoothScroll = new SmoothScroll("[data-scroll='smooth'] a[href^='#']");
 smoothScroll.init();
 
-initAccordion();
+const accordion = new Accordion("[data-accordion='accordion'] .accordion");
+accordion.init();
