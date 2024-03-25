@@ -4,28 +4,24 @@ export default class Accordion{
     this.activeClass = "active";
   }
   
-  handleAccordion(item){
-    if (item) {
+  toggleAccordion(item){
       item.classList.toggle(this.activeClass);
-      const dtElement = item.querySelector("dt");
-      if (dtElement) {
-        dtElement.classList.toggle(this.activeClass);
-      }
-    }
+      item.querySelector("dt").classList.toggle(this.activeClass);
   }
-  
 
   addAccordionEvent(){
     this.accordionList.forEach((item)=>{
-      item.addEventListener("click", ()=> this.handleAccordion(item));
+      item.addEventListener("click", ()=> {
+        this.toggleAccordion(item)
+      });
     })
   }
 
   init(){
     if(this.accordionList.length){
       this.addAccordionEvent();
-      this.handleAccordion(this.accordionList[0]);
-      this.handleAccordion(this.accordionList[0].querySelector("dt").classList.add(this.activeClass));
+      this.toggleAccordion(this.accordionList[0]);
+      this.accordionList[0].querySelector("dt").classList.add(this.activeClass);
     }
   }
 }
