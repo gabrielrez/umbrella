@@ -18,7 +18,7 @@
       <img class="header-logo" src="img/umbrella-logo.svg">
       <a href="./html/login.html" class="login-mobile poppins-semibold c01">Fazer Login</a>
       <nav>
-        <ul class="header-menu">
+        <ul class="header-menu" data-scroll="smooth">
           <li><a class="poppins-medium c10" href="#about">Sobre Nós</a></li>
           <li><a class="poppins-medium c10" href="#benefits">Vantagens</a></li>
           <li><a class="poppins-medium c10" href="#faq">FAQ</a></li>
@@ -38,15 +38,15 @@
     </div>
     <img class="home-img-mobile" src="img/home-img-mobile.svg">
   </main>
-  <div id="about" class="about-bg">
+  <section id="about" class="about-bg">
     <div class="about">
       <h1 class="about-title poppins-semibold c11">Sobre Nós<span class="detail">.</span></h1>
       <p class="about-text roboto-regular c10">Nosso objetivo é oferecer uma solução abrangente que permita aos médicos e administradores focarem no que realmente importa: o cuidado com os pacientes. Desde o agendamento de consultas até o acompanhamento do histórico médico, o Umbrella oferece ferramentas flexíveis e eficientes para otimizar todos os aspectos da operação clínica.</p>
       <img class="about-img" src="img/about-img.svg" width="500">
     </div>
-  </div>
+  </section>
 
-  <div id="benefits" class="benefits-bg">
+  <section id="benefits" class="benefits-bg">
     <div class="benefits">
       <h1 class="benefits-title poppins-semibold c01">Vantagens<span class="detail-green">.</span></h1>
       <div class="benefits-container">
@@ -67,10 +67,10 @@
         </div>
       </div>
     </div>
-  </div>
-  <div id="faq" class="faq">
+  </section>
+  <section id="faq" class="faq">
     <h1 class="faq-title poppins-semibold c11">Perguntas Frequentes<span class="detail">.</span></h1>
-    <dl class="faq-list js-accordion">
+    <dl class="faq-list" data-accordion="accordion">
       <div class="accordion">
         <dt class="poppins-semibold c11">Para quem é direcionada a plataforma?</dt>
         <dd class="roboto-regular c10">
@@ -96,21 +96,21 @@
         <dd class="roboto-regular c10">Sim, você pode acessar os prontuários de qualquer lugar, desde que tenha uma conexão à internet e acesso ao sistema.</dd>
       </div>
     </dl>
-  </div>
+  </section>
 
   <footer class="footer-bg">
     <div class="footer">
       <img class="logo-footer" src="img/umbrella-logo-footer.svg">
       <div class="contact">
         <h3 class="contact-title poppins-medium c01">Contato</h3>
-        <ul>
+        <ul data-scroll="smooth">
           <li><a class="roboto-regular c05" href="tel:+5599999999">+55 (99) 9999-9999</a></li>
           <li><a class="roboto-regular c05" href="mailto:umbrella@umbrella.com">umbrella@umbrella.com</a></li>
         </ul>
       </div>
       <div class="info">
         <h3 class="info-title poppins-medium c01">Informações</h3>
-        <ul>
+        <ul data-scroll="smooth">
           <li><a class="roboto-regular c05" href="#home">Início</a></li>
           <li><a class="roboto-regular c05" href="#about">Sobre Nós</a></li>
           <li><a class="roboto-regular c05" href="#benefits">Vantagens</a></li>
@@ -121,7 +121,7 @@
     </div>
   </footer>
 
-  <script src="./js/landing-page.js"></script>
+  <script type="module" src="/js/script.js"></script>
 </body>
 
 </html>
