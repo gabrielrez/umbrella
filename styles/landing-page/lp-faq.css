@@ -24,21 +24,21 @@
   margin-top: 32px;
 }
 
-.faq-container {
+.faq-list {
   margin-top: 80px;
 }
 
-.faq-container div {
+.faq-list div {
   padding: 20px;
   border-radius: 8px;
   cursor: pointer;
 }
 
-.faq-container div:nth-child(odd) {
+.faq-list div:nth-child(odd) {
   background-color: var(--c01);
 }
 
-.faq-container dt {
+.faq-list dt {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -46,7 +46,7 @@
   line-height: 1.25;
 }
 
-.faq-container dt:before {
+.faq-list dt:before {
   content: "";
   display: inline-block;
   width: 8px;
@@ -55,7 +55,7 @@
   transition: 0.2s ease;
 }
 
-.faq-container dd {
+.faq-list dd {
   margin-left: 16px;
   margin-top: 16px;
   max-width: 80ch;
@@ -64,25 +64,25 @@
   display: none;
 }
 
-.faq-container .accordion.active dd {
+.faq-list .accordion.active dd {
   display: flex;
-  animation: accordionAnimation 0.2s ease;
+  animation: accordionAnimation 0.5s forwards;
 }
 
-.faq-container dt.active:before {
+.faq-list dt.active:before {
   width: 16px;
   height: 8px;
 }
 
 @keyframes accordionAnimation {
   from {
-    transform: translate3d(0, -16px, 0);
+    transform: translate3d(0, -10px, 0);
     opacity: 0;
   }
 
   to {
     transform: translate3d(0, 0, 0);
-    opacity: 100;
+    opacity: 1;
   }
 }
 
@@ -101,7 +101,7 @@
     display: none;
   }
 
-  .faq-container dt {
+  .faq-list dt {
     font-size: 1rem;
   }
 }
