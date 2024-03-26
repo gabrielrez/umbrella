@@ -58,7 +58,33 @@ class Accordion{
   }
 }
 
+class AnimaScroll{
+  constructor(sections){
+    this.sections = document.querySelectorAll(sections);
+    this.windowHalf = window.innerHeight * 0.6;
+    this.animaScroll = this.animaScroll.bind(this);
+  }
+
+  animaScroll(){
+    this.sections.forEach((section)=>{
+      const sectionTop = section.getBoundingClientRect().top - this.windowHalf;
+      if(sectionTop < 0){
+        section.classList.add("active");
+      }
+    })
+  }
+
+  init(){
+    if(this.sections.length){
+      this.animaScroll();
+      window.addEventListener("scroll", this.animaScroll);
+    }
+  }
+}
+
 const smoothScroll = new SmoothScroll("[data-scroll='smooth'] a[href^='#']");
 smoothScroll.init();
 const accordion = new Accordion("[data-accordion='accordion'] .accordion");
 accordion.init();
+const animaScroll = new AnimaScroll("[data-anima]");
+animaScroll.init()
