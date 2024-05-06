@@ -1,9 +1,10 @@
 @import "../../styles/global/geral.css";
 
 body {
-  height: 100vh;
+  min-height: 100vh;
   background: linear-gradient(var(--cBase03), var(--cBase01));
   background-repeat: no-repeat;
+  padding: 40px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -48,41 +49,4 @@ form {
 .form-link {
   text-decoration: underline;
   margin-top: 16px;
-}
-
-.autentication-img1,
-.autentication-img2 {
-  position: absolute;
-  z-index: -1;
-  opacity: 50%;
-}
-
-.autentication-img1 {
-  right: 120px;
-  top: 40px;
-}
-
-.autentication-img2 {
-  left: 120px;
-  bottom: 40px;
-}
-
-@media(max-width: 1000px) {
-
-  .autentication-img1,
-  .autentication-img2 {
-    display: none;
-  }
-}
-
-@media(max-width: 450px) {
-  form {
-    width: 300px;
-  }
-}
-
-@media(max-width: 350px) {
-  form {
-    width: 280px;
-  }
 }

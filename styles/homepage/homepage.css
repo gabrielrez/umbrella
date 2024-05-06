@@ -1,0 +1,45 @@
+@import "../global/geral.css";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+}
+
+.homepage-title {
+  padding-top: 16px;
+  margin-bottom: 64px;
+  text-align: center;
+  font-size: 3rem;
+  line-height: 1.5;
+}
+
+.homepage-title::after {
+  content: "";
+  width: 160px;
+  height: 4px;
+  background-color: var(--cBase01);
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 32px;
+}
+
+.btn-cadastrar {
+  display: block;
+  margin: 0 auto;
+  padding: 16px 28px;
+  background-color: var(--cBase01);
+  font-size: 1.125rem;
+  border-radius: 8px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+  transition: 0.2s ease;
+}
+
+.btn-cadastrar:hover {
+  background-color: #7F16AB;
+}
