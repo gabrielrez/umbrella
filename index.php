@@ -9,21 +9,21 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
   <link rel="icon" href="img/umbrella.svg">
   <title>Umbrella - Landing Page</title>
-  <link rel="stylesheet" href="./styles/style.css">
+  <link rel="stylesheet" href="/clinic_management/public/styles/landing_page/lp.css">
 </head>
 
 <body>
   <header id="home" class="header-bg">
     <div class="header">
-      <img class="header-logo" src="img/umbrella-logo.svg">
-      <a href="./html/login.html" class="login-mobile poppins-semibold c01">Fazer Login</a>
+      <img class="header-logo" src="/clinic_management/public/midia//img/umbrella-logo.svg">
+      <a class="login-mobile poppins-semibold c01" href="#">Fazer Login</a>
       <nav>
         <ul class="header-menu" data-scroll="smooth">
           <li><a class="poppins-medium c10" href="#about">Sobre Nós</a></li>
           <li><a class="poppins-medium c10" href="#benefits">Vantagens</a></li>
           <li><a class="poppins-medium c10" href="#faq">FAQ</a></li>
         </ul>
-        <a class="nav-btn poppins-semibold c01" href="./pages/login.html">ENTRAR</a>
+        <a class="nav-btn poppins-semibold c01">ENTRAR</a>
       </nav>
     </div>
   </header>
@@ -32,17 +32,17 @@
       <div class="home-content">
         <h1 class="home-title poppins-semibold c11">Inove na Gestão<br>da sua Clínica<span class="detail">.</span></h1>
         <p class="home-text roboto-regular c10">Agende consultas, gerencie pacientes, acompanhe registros médicos e controle finanças de forma integrada e segura.</p>
-        <a class="home-btn poppins-semibold c01" href="./pages/sign-up.html">COMEÇAR AGORA</a>
+        <a class="home-btn poppins-semibold c01" href="/clinic_management/views/adminMasterView.php">COMEÇAR AGORA</a>
       </div>
-      <img class="home-img" src="img/home-img.png" alt="Site Umbrella por dentro">
+      <img class="home-img" src="/clinic_management/public/midia//img/home-img.png" alt="Site Umbrella por dentro">
     </div>
-    <img class="home-img-mobile" src="img/home-img-mobile.svg">
+    <img class="home-img-mobile" src="/clinic_management/public/midia//img/home-img-mobile.svg">
   </main>
   <section id="about" class="about-bg">
     <div class="about" data-anima="show-left">
       <h1 class="about-title poppins-semibold c11">Sobre Nós<span class="detail">.</span></h1>
       <p class="about-text roboto-regular c10">Nosso objetivo é oferecer uma solução abrangente que permita aos médicos e administradores focarem no que realmente importa: o cuidado com os pacientes. Desde o agendamento de consultas até o acompanhamento do histórico médico, o Umbrella oferece ferramentas flexíveis e eficientes para otimizar todos os aspectos da operação clínica.</p>
-      <img class="about-img" src="img/about-img.svg" width="500">
+      <img class="about-img" src="/clinic_management/public/midia//img/about-img.svg" width="500">
     </div>
   </section>
 
@@ -51,17 +51,17 @@
       <h1 class="benefits-title poppins-semibold c01" data-anima="show-left">Vantagens<span class="detail-green">.</span></h1>
       <div class="benefits-container">
         <div class="item" data-anima="show-up">
-          <img src="img/schedule.svg">
+          <img src="/clinic_management/public/midia//img/schedule.svg">
           <h3 class="item-title poppins-medium cBase02">Gestão de Agenda</h3>
           <p class="item-text roboto-regular c01">Simplifique a gestão dos seus compromissos com um sistema prático de agendamento. Otimize a administração com facilidade!</p>
         </div>
         <div class="item" data-anima="show-down">
-          <img src="img/folder.svg">
+          <img src="/clinic_management/public/midia//img/folder.svg">
           <h3 class="item-title poppins-medium cBase02">Prontuário Eletrônico</h3>
           <p class="item-text roboto-regular c01">Registre informações de pacientes em cada sessão e acesse os prontuários de forma conveniente, em qualquer lugar e a qualquer momento.</p>
         </div>
         <div class="item" data-anima="show-up">
-          <img src="img/people.svg">
+          <img src="/clinic_management/public/midia//img/people.svg">
           <h3 class="item-title poppins-medium cBase02">Gestão de Pacientes</h3>
           <p class="item-text roboto-regular c01">Cadastre seus pacientes e tenha todos os dados essenciais na palma da mão, proporcionando uma gestão eficiente e acessível a qualquer momento.</p>
         </div>
@@ -100,7 +100,7 @@
 
   <footer class="footer-bg">
     <div class="footer">
-      <img class="logo-footer" src="img/umbrella-logo-footer.svg">
+      <img class="logo-footer" src="/clinic_management/public/midia//img/umbrella-logo-footer.svg">
       <div class="contact">
         <h3 class="contact-title poppins-medium c01">Contato</h3>
         <ul data-scroll="smooth">
@@ -121,7 +121,7 @@
     </div>
   </footer>
 
-  <script src="./js/landing-page.js"></script>
+  <script src="/clinic_management/public/scripts/lp.js"></script>
 </body>
 
 </html>
