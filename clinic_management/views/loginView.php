@@ -16,26 +16,17 @@
   </header>
 
   <section>
-    <h1 class="sign-up-title poppins-medium c11">Cadastre sua <span class="detail poppins-semibold">clínica</class>
-    </h1>
+    <h1 class="sign-in-title poppins-medium c11">Entre na sua conta</h1>
     <form method="post">
-      <div class="input-container">
-        <label class="roboto-regular">Nome da clínica</label>
-        <input type="text" class="roboto-regular" placeholder="Nome da clínica*" required>
-      </div>
       <div class="input-container">
         <label class="roboto-regular">Email</label>
         <input type="email" class="roboto-regular" placeholder="Email*" required>
       </div>
       <div class="input-container">
-        <label class="roboto-regular">CNPJ</label>
-        <input type="number" class="roboto-regular" placeholder="CNPJ*" required>
-      </div>
-      <div class="input-container">
         <label class="roboto-regular">Senha</label>
         <input type="password" class="roboto-regular" placeholder="Senha*" required>
       </div>
-      <button type="submit" class="sign-up-btn poppins-semibold c01">Cadastrar</button>
+      <button type="submit" class="sign-in-btn poppins-semibold c01">Entrar</button>
     </form>
   </section>
 </body>
