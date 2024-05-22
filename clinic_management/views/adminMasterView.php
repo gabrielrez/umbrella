@@ -14,34 +14,32 @@
 
 <body>
   <header>
-    <img src="/clinic_management/public/midia/img/umbrella-logo.svg">
+    <img src="/clinic_management/public/midia/img/umbrella-logo-footer.svg">
+    <a class="nav-btn poppins-semibold c01" href="../../index.php">Sair da Conta</a>
   </header>
 
   <div class="container">
-    <button id="openModal" class="create-btn poppins-semibold c01">Cadastrar Usuário</button>
+    <button class="create-btn poppins-semibold c01">Cadastrar Usuário</button>
 
     <!-- Modal -->
-    <div id="myModal" class="modal hidden fixed z-10 inset-0 overflow-y-auto">
-      <div class="flex items-center justify-center min-h-screen">
-        <div class="modal-content bg-white rounded-lg p-8">
-          <span class="close absolute top-0 right-0 p-4 cursor-pointer">&times;</span>
-          <h2 class="text-2xl font-semibold mb-4">Cadastro de Usuário</h2>
-          <form>
-            <div class="mb-4">
-              <label class="block text-sm font-medium text-gray-700">Nome</label>
-              <input type="text" class="form-input mt-1 block w-full" placeholder="Nome*" required>
+    <div class="modal-container">
+      <div class="modal-box">
+        <h2 class="modal-title poppins-semibold">Cadastro de Usuário</h2>
+        <div class="modal-content">
+          <form method="post">
+            <div class="input-container">
+              <label class="roboto-regular">Nome da clínica</label>
+              <input type="text" class="roboto-regular" placeholder="Nome da clínica*" required>
             </div>
-            <div class="mb-4">
-              <label class="block text-sm font-medium text-gray-700">Email</label>
-              <input type="email" class="form-input mt-1 block w-full" placeholder="Email*" required>
+            <div class="input-container">
+              <label class="roboto-regular">Email</label>
+              <input type="email" class="roboto-regular" placeholder="Email*" required>
             </div>
-            <div class="mb-4">
-              <label class="block text-sm font-medium text-gray-700">Senha</label>
-              <input type="password" class="form-input mt-1 block w-full" placeholder="Senha*" required>
+            <div class="input-container">
+              <label class="roboto-regular">Senha</label>
+              <input type="password" class="roboto-regular" placeholder="Senha*" required>
             </div>
-            <div class="flex justify-end">
-              <button type="submit" class="bg-purple-700 text-white py-2 px-4 rounded-lg">Cadastrar</button>
-            </div>
+            <button type="submit" class="sign-up-btn-modal poppins-semibold c01">Cadastrar</button>
           </form>
         </div>
       </div>
@@ -52,21 +50,49 @@
       <h2 class="poppins-semibold c11">Lista de Usuários</h2>
       <table class="">
         <thead>
-          <tr class="c01">
+          <tr class="c01 poppins-medium">
             <th class="first">#</th>
             <th>Nome</th>
-            <th>Email</th>
+            <th>Tipo</th>
             <th class="last">Ações</th>
           </tr>
         </thead>
         <tbody>
-          <!--
-          <tr><td>1</td><td>Usuário 1</td><td>usuario1@example.com</td><td>Excluir</td></tr>
-        -->
+
+          <tr class="registro roboto-regular">
+            <td>1</td>
+            <td>Usuário 1</td>
+            <td>Paciente</td>
+            <td>Excluir</td>
+          </tr>
+
+          <tr class="registro roboto-regular">
+            <td>2</td>
+            <td>Usuário 2</td>
+            <td>Medico</td>
+            <td>Excluir</td>
+          </tr>
+
+          <tr class="registro roboto-regular">
+            <td>3</td>
+            <td>Usuário 3</td>
+            <td>Medico</td>
+            <td>Excluir</td>
+          </tr>
+
+          <tr class="registro roboto-regular">
+            <td>4</td>
+            <td>Usuário 4</td>
+            <td>Paciente</td>
+            <td>Excluir</td>
+          </tr>
+
         </tbody>
       </table>
     </div>
   </div>
+
+  <script src="../public/scripts/modal.js"></script>
 
 </body>
 
