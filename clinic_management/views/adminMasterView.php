@@ -9,16 +9,16 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
   <link rel="icon" href="img/umbrella.svg">
   <title>Home Page</title>
-  <link rel="stylesheet" href="../public/styles/admin_master/admin_master.css">
+  <link rel="stylesheet" href="/clinic_management/public/styles/admin_master/admin_master.css">
 </head>
 
 <body>
-  <header class="mx-auto container p-5 mt-4 md:flex items-center justify-between hidden bg-white/60 backdrop-blur-md rounded-lg">
+  <header>
     <img src="/clinic_management/public/midia/img/umbrella-logo.svg">
   </header>
 
-  <div class="container mx-auto mt-10">
-    <button id="openModal" class="bg-cBase1 text-white py-3 px-6 rounded-lg mb-6">Cadastrar Usuário</button>
+  <div class="container">
+    <button id="openModal" class="create-btn poppins-semibold c01">Cadastrar Usuário</button>
 
     <!-- Modal -->
     <div id="myModal" class="modal hidden fixed z-10 inset-0 overflow-y-auto">
@@ -46,17 +46,17 @@
         </div>
       </div>
     </div>
+    <!-- Modal -->
 
-    <!-- Tabela de Usuários -->
     <div class="bg-white/60 backdrop-blur-md rounded-lg p-6">
-      <h2 class="text-2xl font-semibold mb-4">Lista de Usuários</h2>
-      <table class="table-auto w-full">
+      <h2 class="poppins-semibold c11">Lista de Usuários</h2>
+      <table class="">
         <thead>
-          <tr>
-            <th class="px-4 py-2">#</th>
-            <th class="px-4 py-2">Nome</th>
-            <th class="px-4 py-2">Email</th>
-            <th class="px-4 py-2">Ações</th>
+          <tr class="c01">
+            <th class="first">#</th>
+            <th>Nome</th>
+            <th>Email</th>
+            <th class="last">Ações</th>
           </tr>
         </thead>
         <tbody>
