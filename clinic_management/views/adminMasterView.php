@@ -19,6 +19,8 @@
   </header>
 
   <div class="container">
+    <h3 class="wellcome-title poppins-semibold c11">Clínica Nome da Clínica</h3>
+
     <button class="create-btn poppins-semibold c01">Cadastrar Usuário</button>
 
     <!-- Modal -->

@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Umbrella - Cadastro</title>
+  <title>Umbrella-Login</title>
   <link rel="stylesheet" href="/clinic_management/public/styles/autentication/cadastro.css">
 </head>
 
@@ -19,8 +19,8 @@
     <h1 class="sign-in-title poppins-medium c11">Entre na sua conta</h1>
     <form method="post">
       <div class="input-container">
-        <label class="roboto-regular">Email</label>
-        <input type="email" class="roboto-regular" placeholder="Email*" required>
+        <label class="roboto-regular">Nome</label>
+        <input type="text" class="roboto-regular" placeholder="Nome*" required>
       </div>
       <div class="input-container">
         <label class="roboto-regular">Senha</label>
