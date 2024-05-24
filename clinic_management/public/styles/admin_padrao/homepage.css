@@ -1,5 +1,6 @@
 @import "../global/geral.css";
 @import "../autentication/form.css";
+@import "../global/modal.css";
 
 header {
   max-width: 1200px;
@@ -12,6 +13,12 @@ header {
   background-color: var(--cBase01);
   margin-top: 32px;
   border-radius: 8px;
+}
+
+.header-menu-admin {
+  display: flex;
+  align-items: center;
+  gap: 40px;
 }
 
 .exit-session-btn {

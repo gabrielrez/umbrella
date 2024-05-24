@@ -1,12 +1,12 @@
 <?php
-session_start();
+// session_start();
 
-if (isset($_SESSION['clinic_name'])) {
-  $clinicName = $_SESSION['clinic_name'];
-} else {
-  header('Location: login.php');
-  exit;
-}
+// if (isset($_SESSION['clinic_name'])) {
+//   $clinicName = $_SESSION['clinic_name'];
+// } else {
+//   header('Location: loginView.php');
+//   exit;
+// }
 ?>
 
 <!DOCTYPE html>
@@ -32,32 +32,7 @@ if (isset($_SESSION['clinic_name'])) {
   <div class="container">
     <h1 class="wellcome-title poppins-semibold c11"><?php echo htmlspecialchars($clinicName); ?></h1>
 
-    <button class="create-btn poppins-semibold c01">Cadastrar Usuário</button>
-
-    <!-- Modal -->
-    <div class="modal-container">
-      <div class="modal-box">
-        <h2 class="modal-title poppins-semibold">Cadastro de Usuário</h2>
-        <div class="modal-content">
-          <form method="post">
-            <div class="input-container">
-              <label class="roboto-regular">Nome da clínica</label>
-              <input type="text" class="roboto-regular" placeholder="Nome da clínica*" required>
-            </div>
-            <div class="input-container">
-              <label class="roboto-regular">Email</label>
-              <input type="email" class="roboto-regular" placeholder="Email*" required>
-            </div>
-            <div class="input-container">
-              <label class="roboto-regular">Senha</label>
-              <input type="password" class="roboto-regular" placeholder="Senha*" required>
-            </div>
-            <button type="submit" class="sign-up-btn-modal poppins-semibold c01">Cadastrar</button>
-          </form>
-        </div>
-      </div>
-    </div>
-    <!-- Modal -->
+    <button class="create-btn open-modal-btn poppins-semibold c01">Cadastrar Usuário</button>
 
     <div>
       <h3 class="poppins-semibold c11">Lista de Usuários</h3>
@@ -105,8 +80,30 @@ if (isset($_SESSION['clinic_name'])) {
     </div>
   </div>
 
-  <script src="../public/scripts/modal.js"></script>
+  <div id="modal" class="modal-container">
+    <div class="modal-box">
+      <h2 class="modal-title poppins-semibold">Cadastro de Usuário</h2>
+      <div class="modal-content">
+        <form method="post">
+          <div class="input-container">
+            <label class="roboto-regular">Nome da clínica</label>
+            <input type="text" class="roboto-regular" placeholder="Nome da clínica*" required>
+          </div>
+          <div class="input-container">
+            <label class="roboto-regular">Email</label>
+            <input type="email" class="roboto-regular" placeholder="Email*" required>
+          </div>
+          <div class="input-container">
+            <label class="roboto-regular">Senha</label>
+            <input type="password" class="roboto-regular" placeholder="Senha*" required>
+          </div>
+          <button type="submit" class="sign-up-btn-modal poppins-semibold c01">Cadastrar</button>
+        </form>
+      </div>
+    </div>
+  </div>
 
+  <script type="module" src="../public/scripts/main.js"></script>
 </body>
 
 </html>
