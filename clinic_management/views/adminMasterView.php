@@ -1,3 +1,14 @@
+<?php
+session_start();
+
+if (isset($_SESSION['clinic_name'])) {
+  $clinicName = $_SESSION['clinic_name'];
+} else {
+  header('Location: login.php');
+  exit;
+}
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -15,11 +26,11 @@
 <body>
   <header>
     <img src="/clinic_management/public/midia/img/umbrella-logo-footer.svg">
-    <a class="nav-btn poppins-semibold c01" href="../../index.php">Sair da Conta</a>
+    <button type="submit" onclick="location.href='logout.php'" class="exit-session-btn poppins-semibold c01">Sair da Conta</button>
   </header>
 
   <div class="container">
-    <h3 class="wellcome-title poppins-semibold c11">Clínica Nome da Clínica</h3>
+    <h1 class="wellcome-title poppins-semibold c11"><?php echo htmlspecialchars($clinicName); ?></h1>
 
     <button class="create-btn poppins-semibold c01">Cadastrar Usuário</button>
 
@@ -48,8 +59,8 @@
     </div>
     <!-- Modal -->
 
-    <div class="bg-white/60 backdrop-blur-md rounded-lg p-6">
-      <h2 class="poppins-semibold c11">Lista de Usuários</h2>
+    <div>
+      <h3 class="poppins-semibold c11">Lista de Usuários</h3>
       <table class="">
         <thead>
           <tr class="c01 poppins-medium">

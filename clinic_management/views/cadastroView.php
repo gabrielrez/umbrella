@@ -16,14 +16,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $clinicExists = $stmt->fetchColumn();
 
     if ($clinicExists) {
-      echo "Clinica já cadastrada.";
+      echo  "<script>alert('Erro ao cadastrar, clínica já cadastrada.');</script>";
     } else {
-      $stmt = $conn->prepare("INSERT INTO clinics (nome, cnpj, password) VALUES (?, ?, ?)");
+      $stmt = $conn->prepare("INSERT INTO clinics (nome, cnpj, senha) VALUES (?, ?, ?)");
       $hashedPassword = password_hash($clinicPassword, PASSWORD_BCRYPT);
       $stmt->execute([$clinicName, $clinicCNPJ, $hashedPassword]);
       $clinicId = $conn->lastInsertId();
 
       $_SESSION['clinic_id'] = $clinicId;
+      $_SESSION['clinic_name'] = $clinicName;
       header('Location: adminMasterView.php');
       exit;
     }
@@ -46,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <body>
   <header id="home" class="header-bg">
     <div class="header">
-      <img class="header-logo" src="/clinic_management/public/midia//img/umbrella-logo.svg">
+      <a href="/clinic_management/views/landingPageView.php"><img class="header-logo" src="/clinic_management/public/midia//img/umbrella-logo.svg"></a>
     </div>
   </header>
 
