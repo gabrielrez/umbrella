@@ -4,9 +4,14 @@ require_once 'User.php';
 class Paciente extends User
 {
 
-  public function __construct($id, $username, $password)
+  public $age;
+  public $clinicHistory;
+
+  public function __construct($id, $username, $password, $age, $clinicHistory)
   {
     parent::__construct($id, $username, $password, 'paciente');
+    $this->age = $age;
+    $this->clinicHistory = $clinicHistory;
   }
 
   public function getPermissions()

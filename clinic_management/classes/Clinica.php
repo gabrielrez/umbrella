@@ -1,7 +1,7 @@
 <?php
 require_once 'User.php';
 
-class AdminMaster extends User
+class Clinica extends User
 {
 
   public function __construct($id, $username, $password)
