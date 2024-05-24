@@ -19,7 +19,7 @@ if (isset($_SESSION['clinic_name'])) {
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
   <link rel="icon" href="img/umbrella.svg">
-  <title>Home Page</title>
+  <title>Clinica Dashboard</title>
   <link rel="stylesheet" href="/clinic_management/public/styles/admin_master/admin_master.css">
 </head>
 

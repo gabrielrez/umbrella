@@ -13,7 +13,8 @@
 </head>
 
 <body>
-  <!-- <a href="/clinic_management/views/adminMasterView.php">teste</a> -->
+  <a href="/clinic_management/views/adminMasterView.php">clinica</a>
+  <a href="/clinic_management/views/adminView.php">admin</a>
   <header id="home" class="header-bg">
     <div class="header">
       <img class="header-logo" src="/clinic_management/public/midia//img/umbrella-logo.svg">

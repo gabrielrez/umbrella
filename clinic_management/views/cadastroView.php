@@ -7,20 +7,21 @@ session_start();
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   $clinicName = $_POST['clinic_name'];
   $clinicCNPJ = $_POST['clinic_cnpj'];
+  $clinicEmail = $_POST['clinic_email'];
   $clinicPassword = $_POST['clinic_password'];
 
   try {
     $conn = Database::getConn();
-    $stmt = $conn->prepare("SELECT COUNT(*) FROM clinics WHERE cnpj = ? OR nome = ?");
-    $stmt->execute([$clinicCNPJ, $clinicName]);
+    $stmt = $conn->prepare("SELECT COUNT(*) FROM clinics WHERE cnpj = ? OR email = ?");
+    $stmt->execute([$clinicCNPJ, $clinicEmail]);
     $clinicExists = $stmt->fetchColumn();
 
     if ($clinicExists) {
       echo  "<script>alert('Erro ao cadastrar, clínica já cadastrada.');</script>";
     } else {
-      $stmt = $conn->prepare("INSERT INTO clinics (nome, cnpj, senha) VALUES (?, ?, ?)");
+      $stmt = $conn->prepare("INSERT INTO clinics (nome, cnpj, email, senha) VALUES (?, ?, ?, ?)");
       $hashedPassword = password_hash($clinicPassword, PASSWORD_BCRYPT);
-      $stmt->execute([$clinicName, $clinicCNPJ, $hashedPassword]);
+      $stmt->execute([$clinicName, $clinicCNPJ, $clinicEmail, $hashedPassword]);
       $clinicId = $conn->lastInsertId();
 
       $_SESSION['clinic_id'] = $clinicId;
@@ -62,6 +63,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       <div class="input-container">
         <label class="roboto-regular">CNPJ</label>
         <input type="number" class="roboto-regular" name="clinic_cnpj" placeholder="CNPJ*" required>
+      </div>
+      <div class="input-container">
+        <label class="roboto-regular">Email</label>
+        <input type="email" class="roboto-regular" name="clinic_email" placeholder="Email*" required>
       </div>
       <div class="input-container">
         <label class="roboto-regular">Senha</label>
