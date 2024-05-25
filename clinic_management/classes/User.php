@@ -1,18 +1,20 @@
 <?php
 abstract class User
 {
-  protected $id;
   protected $username;
+  protected $email;
   protected $password;
   protected $role;
 
-  public function __construct($id, $username, $password, $role)
+  public function __construct($username, $email, $password, $role)
   {
-    $this->id = $id;
     $this->username = $username;
+    $this->email = $email;
     $this->password = $password;
     $this->role = $role;
   }
+
+  public abstract function cadastrar();
 
   public abstract function getPermissions();
 }

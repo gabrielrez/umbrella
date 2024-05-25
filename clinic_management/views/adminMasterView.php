@@ -1,14 +1,3 @@
-<?php
-// session_start();
-
-// if (isset($_SESSION['clinic_name'])) {
-//   $clinicName = $_SESSION['clinic_name'];
-// } else {
-//   header('Location: loginView.php');
-//   exit;
-// }
-?>
-
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -30,7 +19,7 @@
   </header>
 
   <div class="container">
-    <h1 class="wellcome-title poppins-semibold c11"><?php echo htmlspecialchars($clinicName); ?></h1>
+    <h1 class="wellcome-title poppins-semibold c11"><?php echo htmlspecialchars($_GET['clinicName']); ?></h1>
 
     <button class="create-btn open-modal-btn poppins-semibold c01">Cadastrar Usuário</button>
 

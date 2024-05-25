@@ -25,7 +25,8 @@ label {
   display: block;
 }
 
-input {
+input,
+#user_type {
   margin-top: 4px;
   width: 100%;
   padding: 16px 10px;
