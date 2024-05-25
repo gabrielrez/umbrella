@@ -10,6 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   if ($adminName && $adminEmail && $adminPassword) {
     $admin = new AdminPadrao($adminName, $adminEmail, $adminPassword);
     $admin->cadastrar();
+    header('Location: /clinic_management/views/adminMasterView.php?clinicName=' . urlencode($clinicName));
   } else {
     die("Error: All fields are required.");
   }

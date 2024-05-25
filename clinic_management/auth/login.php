@@ -29,10 +29,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         switch ($userType) {
           case 'clinica':
             $clinicName = $user['nome'];
+            session_start();
+            $_SESSION['nome'] = $clinicName;
             header('Location: /clinic_management/views/adminMasterView.php?clinicName=' . urlencode($clinicName));
             exit();
           case 'admin':
             $adminName = $user['nome'];
+            session_start();
+            $_SESSION['nome'] = $adminName;
             header('Location: /clinic_management/views/adminView.php?adminName=' . urlencode($adminName));
             exit();
           case 'medico':

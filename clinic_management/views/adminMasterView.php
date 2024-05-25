@@ -2,8 +2,12 @@
 require_once '../config/Database.php';
 require_once '../classes/AdminPadrao.php';
 
+session_start();
+
 $adminPadrao = new AdminPadrao(null, null, null, null);
 $admins = $adminPadrao->getAll();
+
+$clinicName = $_SESSION['nome'];
 ?>
 
 <!DOCTYPE html>
@@ -27,7 +31,7 @@ $admins = $adminPadrao->getAll();
   </header>
 
   <div class="container">
-    <h1 class="wellcome-title poppins-semibold c11"><?php echo htmlspecialchars($_GET['clinicName']); ?></h1>
+    <h1 class="wellcome-title poppins-semibold c11"><?php echo htmlspecialchars($clinicName); ?></h1>
 
     <button class="create-btn open-modal-btn poppins-semibold c01">Cadastrar Usuário</button>
 
@@ -44,12 +48,12 @@ $admins = $adminPadrao->getAll();
         </thead>
         <tbody>
           <?php foreach ($admins as $admin) : ?>
-          <tr class="registro roboto-regular">
-            <td><?php echo htmlspecialchars($admin['id']); ?></td>
-            <td><?php echo htmlspecialchars($admin['nome']); ?></td>
-            <td><?php echo htmlspecialchars($admin['email']); ?></td>
-            <td>Excluir</td>
-          </tr>
+            <tr class="registro roboto-regular">
+              <td><?php echo htmlspecialchars($admin['id']); ?></td>
+              <td><?php echo htmlspecialchars($admin['nome']); ?></td>
+              <td><?php echo htmlspecialchars($admin['email']); ?></td>
+              <td>Excluir</td>
+            </tr>
           <?php endforeach; ?>
         </tbody>
       </table>

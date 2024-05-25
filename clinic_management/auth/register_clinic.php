@@ -11,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   if ($clinicName && $clinicCnpj && $clinicEmail && $clinicPassword) {
     $clinic = new Clinica($clinicName, $clinicEmail, $clinicCnpj, $clinicPassword);
     $clinic->cadastrar();
-    header('Location: /clinic_management/views/adminMasterView.php?clinicName=' . urlencode($clinicName));
+    header('Location: /clinic_management/views/loginView.php');
     exit();
   } else {
     die("Error: All fields are required.");

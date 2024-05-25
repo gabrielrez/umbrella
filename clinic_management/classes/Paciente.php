@@ -5,13 +5,13 @@ class Paciente extends User
 {
 
   public $age;
-  public $clinicHistory;
+  public $sexo;
 
-  public function __construct($id, $username, $password, $age, $clinicHistory)
+  public function __construct($username, $email, $age, $sexo, $password)
   {
-    parent::__construct($id, $username, $password, 'paciente');
+    parent::__construct($username, $email, $password, 'paciente');
     $this->age = $age;
-    $this->clinicHistory = $clinicHistory;
+    $this->sexo = $sexo;
   }
 
   public function getPermissions()
@@ -21,25 +21,24 @@ class Paciente extends User
 
   public function cadastrar()
   {
-    //cadastrar
+    try {
+      $conn = Database::getConn();
+      $stmt = $conn->prepare("INSERT INTO paciente (nome, email, data_nascimento, sexo, senha, tipo) VALUES (?, ?, ?, ?, ?, ?)");
+      $stmt->execute([$this->username, $this->email, $this->age, $this->sexo, password_hash($this->password, PASSWORD_BCRYPT), 'Paciente']);
+    } catch (PDOException $e) {
+      die("Error: " . $e->getMessage());
+    }
   }
 
   public function getAll()
   {
-    //getAll
+    try {
+      $conn = Database::getConn();
+      $stmt = $conn->prepare("SELECT * FROM paciente");
+      $stmt->execute();
+      return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+      die("Error: " . $e->getMessage());
+    }
   }
-
-  // public function viewHistorico()
-  // {
-  //   $conn = Database::getConn();
-  //   $stmt = $conn->query("SELECT * FROM historico WHERE paciente_id = {$this->id}");
-  //   return $stmt->fetchAll(PDO::FETCH_ASSOC);
-  // }
-
-  // public function viewAgendamentos()
-  // {
-  //   $conn = Database::getConn();
-  //   $stmt = $conn->query("SELECT * FROM agendamentos WHERE paciente_id = {$this->id}");
-  //   return $stmt->fetchAll(PDO::FETCH_ASSOC);
-  // }
 }

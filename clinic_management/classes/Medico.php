@@ -21,7 +21,14 @@ class Medico extends User
 
   public function getAll()
   {
-    //getAll
+    try {
+      $conn = Database::getConn();
+      $stmt = $conn->prepare("SELECT * FROM medico");
+      $stmt->execute();
+      return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+      die("Error: " . $e->getMessage());
+    }
   }
 
 

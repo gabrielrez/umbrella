@@ -1,3 +1,19 @@
+<?php
+require_once '../config/Database.php';
+require_once '../classes/Paciente.php';
+require_once '../classes/Medico.php';
+
+session_start();
+
+$paciente = new Paciente(null, null, null, null, null);
+$pacientes = $paciente->getAll();
+
+$medico = new Medico(null, null, null, null, null);
+$medicos = $medico->getAll();
+
+$adminName = $_SESSION['nome'];
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -22,31 +38,38 @@
   </header>
 
   <div class="container">
-    <h1 class="wellcome-title poppins-semibold c11">Bem vindo, <?php echo htmlspecialchars($_GET['adminName']); ?></h1>
+    <h1 class="wellcome-title poppins-semibold c11">Bem vindo, <?php echo htmlspecialchars($adminName); ?></h1>
 
     <div class="forms">
-      <form method="post">
+      <form method="post" action="/clinic_management/auth/register_paciente.php">
         <h2 class="form-title poppins-semibold c11">Cadastrar Paciente</h2>
         <div class="input-container">
           <label class="roboto-regular">Nome do paciente</label>
-          <input type="text" class="roboto-regular" placeholder="Nome do usuário*" required>
+          <input type="text" class="roboto-regular" name="paciente_name" placeholder="Nome do paciente*" required>
         </div>
         <div class="input-container">
           <label class="roboto-regular">Data de nascimento</label>
-          <input type="date" class="roboto-regular" placeholder="Data de nascimento*" required>
+          <input type="date" class="roboto-regular" name="paciente_dt" placeholder="Data de nascimento*" required>
+        </div>
+        <div class="input-container">
+          <label class="roboto-regular">Sexo</label>
+          <select id="paciente_sexo" name="paciente_sexo">
+            <option value="m">Masculino</option>
+            <option value="f">Feminino</option>
+          </select>
         </div>
         <div class="input-container">
           <label class="roboto-regular">Email</label>
-          <input type="email" class="roboto-regular" placeholder="Email*" required>
+          <input type="email" class="roboto-regular" name="paciente_email" placeholder="Email*" required>
         </div>
         <div class="input-container">
           <label class="roboto-regular">Senha</label>
-          <input type="password" class="roboto-regular" placeholder="Senha*" required>
+          <input type="password" class="roboto-regular" name="paciente_senha" placeholder="Senha*" required>
         </div>
         <button type="submit" class="sign-up-btn-modal poppins-semibold c01">Cadastrar</button>
       </form>
 
-      <form method="post">
+      <form method="post" action="/clinic_management/auth/register_medico.php">
         <h2 class="form-title poppins-semibold c11">Cadastrar Médico</h2>
         <div class="input-container">
           <label class="roboto-regular">Nome do médico</label>
@@ -70,40 +93,30 @@
 
     <div>
       <h3 class="poppins-semibold c11">Lista de Usuários</h3>
-      <table class="">
+      <table>
         <thead>
           <tr class="c01 poppins-medium">
             <th class="first">#</th>
-            <th>Nome</th>
             <th>Tipo</th>
+            <th>Nome</th>
+            <th>Email</th>
+            <th>Data Nasc.</th>
+            <th>Sexo</th>
             <th class="last">Ações</th>
           </tr>
         </thead>
         <tbody>
+          <?php foreach ($pacientes as $paciente) : ?>
           <tr class="registro roboto-regular">
-            <td>1</td>
-            <td>Usuário 1</td>
-            <td>Paciente</td>
+            <td><?php echo htmlspecialchars($paciente['id']); ?></td>
+            <td><?php echo htmlspecialchars($paciente['tipo']); ?></td>
+            <td><?php echo htmlspecialchars($paciente['nome']); ?></td>
+            <td><?php echo htmlspecialchars($paciente['email']); ?></td>
+            <td><?php echo htmlspecialchars($paciente['data_nascimento']); ?></td>
+            <td><?php echo htmlspecialchars($paciente['sexo']); ?></td>
             <td>Excluir</td>
           </tr>
-          <tr class="registro roboto-regular">
-            <td>2</td>
-            <td>Usuário 2</td>
-            <td>Medico</td>
-            <td>Excluir</td>
-          </tr>
-          <tr class="registro roboto-regular">
-            <td>3</td>
-            <td>Usuário 3</td>
-            <td>Medico</td>
-            <td>Excluir</td>
-          </tr>
-          <tr class="registro roboto-regular">
-            <td>4</td>
-            <td>Usuário 4</td>
-            <td>Paciente</td>
-            <td>Excluir</td>
-          </tr>
+          <?php endforeach; ?>
         </tbody>
       </table>
     </div>
@@ -113,7 +126,7 @@
     <div class="modal-box">
       <h2 class="modal-title poppins-semibold">Agendar Consulta</h2>
       <div class="modal-content">
-        <form method="post">
+        <form method="post" action="/clinic_management/auth/register_consulta.php">
           <div class="input-container">
             <label class="roboto-regular">Médico CPF</label>
             <input type="number" class="roboto-regular" placeholder="Medico CPF*" required>
