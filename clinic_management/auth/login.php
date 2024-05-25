@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             exit();
           case 'admin':
             $adminName = $user['nome'];
-            header('Location: /clinic_management/views/adminView.php');
+            header('Location: /clinic_management/views/adminView.php?adminName=' . urlencode($adminName));
             exit();
           case 'medico':
             $medicoName = $user['nome'];

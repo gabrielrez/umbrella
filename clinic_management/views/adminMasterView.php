@@ -1,3 +1,11 @@
+<?php
+require_once '../config/Database.php';
+require_once '../classes/AdminPadrao.php';
+
+$adminPadrao = new AdminPadrao(null, null, null, null);
+$admins = $adminPadrao->getAll();
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -25,45 +33,24 @@
 
     <div>
       <h3 class="poppins-semibold c11">Lista de Usuários</h3>
-      <table class="">
+      <table>
         <thead>
           <tr class="c01 poppins-medium">
             <th class="first">#</th>
             <th>Nome</th>
-            <th>Tipo</th>
+            <th>Email</th>
             <th class="last">Ações</th>
           </tr>
         </thead>
         <tbody>
-
+          <?php foreach ($admins as $admin) : ?>
           <tr class="registro roboto-regular">
-            <td>1</td>
-            <td>Usuário 1</td>
-            <td>Paciente</td>
+            <td><?php echo htmlspecialchars($admin['id']); ?></td>
+            <td><?php echo htmlspecialchars($admin['nome']); ?></td>
+            <td><?php echo htmlspecialchars($admin['email']); ?></td>
             <td>Excluir</td>
           </tr>
-
-          <tr class="registro roboto-regular">
-            <td>2</td>
-            <td>Usuário 2</td>
-            <td>Medico</td>
-            <td>Excluir</td>
-          </tr>
-
-          <tr class="registro roboto-regular">
-            <td>3</td>
-            <td>Usuário 3</td>
-            <td>Medico</td>
-            <td>Excluir</td>
-          </tr>
-
-          <tr class="registro roboto-regular">
-            <td>4</td>
-            <td>Usuário 4</td>
-            <td>Paciente</td>
-            <td>Excluir</td>
-          </tr>
-
+          <?php endforeach; ?>
         </tbody>
       </table>
     </div>
@@ -71,20 +58,20 @@
 
   <div id="modal" class="modal-container">
     <div class="modal-box">
-      <h2 class="modal-title poppins-semibold">Cadastro de Usuário</h2>
+      <h2 class="modal-title poppins-semibold">Cadastrar Admin</h2>
       <div class="modal-content">
-        <form method="post">
+        <form method="post" action="/clinic_management/auth/register_admin.php">
           <div class="input-container">
-            <label class="roboto-regular">Nome da clínica</label>
-            <input type="text" class="roboto-regular" placeholder="Nome da clínica*" required>
+            <label class="roboto-regular">Nome</label>
+            <input type="text" class="roboto-regular" name="user_name" placeholder="Nome*" required>
           </div>
           <div class="input-container">
             <label class="roboto-regular">Email</label>
-            <input type="email" class="roboto-regular" placeholder="Email*" required>
+            <input type="email" class="roboto-regular" name="user_email" placeholder="Email*" required>
           </div>
           <div class="input-container">
             <label class="roboto-regular">Senha</label>
-            <input type="password" class="roboto-regular" placeholder="Senha*" required>
+            <input type="password" class="roboto-regular" name="user_senha" placeholder="Senha*" required>
           </div>
           <button type="submit" class="sign-up-btn-modal poppins-semibold c01">Cadastrar</button>
         </form>

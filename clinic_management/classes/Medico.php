@@ -14,17 +14,28 @@ class Medico extends User
     return ['view_pacientes', 'view_agendamentos'];
   }
 
-  public function viewPacientes()
+  public function cadastrar()
   {
-    $conn = Database::getConn();
-    $stmt = $conn->query("SELECT * FROM users WHERE role = 'paciente'");
-    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    //cadastrar
   }
 
-  public function viewAgendamentos()
+  public function getAll()
   {
-    $conn = Database::getConn();
-    $stmt = $conn->query("SELECT * FROM agendamentos WHERE medico_id = {$this->id}");
-    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    //getAll
   }
+
+
+  // public function viewPacientes()
+  // {
+  //   $conn = Database::getConn();
+  //   $stmt = $conn->query("SELECT * FROM users WHERE role = 'paciente'");
+  //   return $stmt->fetchAll(PDO::FETCH_ASSOC);
+  // }
+
+  // public function viewAgendamentos()
+  // {
+  //   $conn = Database::getConn();
+  //   $stmt = $conn->query("SELECT * FROM agendamentos WHERE medico_id = {$this->id}");
+  //   return $stmt->fetchAll(PDO::FETCH_ASSOC);
+  // }
 }

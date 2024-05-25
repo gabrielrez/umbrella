@@ -19,17 +19,27 @@ class Paciente extends User
     return ['view_historico', 'view_agendamentos'];
   }
 
-  public function viewHistorico()
+  public function cadastrar()
   {
-    $conn = Database::getConn();
-    $stmt = $conn->query("SELECT * FROM historico WHERE paciente_id = {$this->id}");
-    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    //cadastrar
   }
 
-  public function viewAgendamentos()
+  public function getAll()
   {
-    $conn = Database::getConn();
-    $stmt = $conn->query("SELECT * FROM agendamentos WHERE paciente_id = {$this->id}");
-    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    //getAll
   }
+
+  // public function viewHistorico()
+  // {
+  //   $conn = Database::getConn();
+  //   $stmt = $conn->query("SELECT * FROM historico WHERE paciente_id = {$this->id}");
+  //   return $stmt->fetchAll(PDO::FETCH_ASSOC);
+  // }
+
+  // public function viewAgendamentos()
+  // {
+  //   $conn = Database::getConn();
+  //   $stmt = $conn->query("SELECT * FROM agendamentos WHERE paciente_id = {$this->id}");
+  //   return $stmt->fetchAll(PDO::FETCH_ASSOC);
+  // }
 }

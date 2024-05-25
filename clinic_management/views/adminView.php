@@ -22,7 +22,7 @@
   </header>
 
   <div class="container">
-    <h1 class="wellcome-title poppins-semibold c11"><?php echo htmlspecialchars($clinicName); ?></h1>
+    <h1 class="wellcome-title poppins-semibold c11">Bem vindo, <?php echo htmlspecialchars($_GET['adminName']); ?></h1>
 
     <div class="forms">
       <form method="post">

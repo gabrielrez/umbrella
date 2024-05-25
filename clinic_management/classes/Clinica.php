@@ -36,4 +36,9 @@ class Clinica extends User
       die("Error: " . $e->getMessage());
     }
   }
+
+  public function getAll()
+  {
+    //getAll
+  }
 }
