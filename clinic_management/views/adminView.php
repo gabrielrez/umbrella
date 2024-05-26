@@ -184,6 +184,10 @@ $adminName = $_SESSION['nome'];
             <label class="roboto-regular">Data</label>
             <input type="date" class="roboto-regular" placeholder="Data*" required>
           </div>
+          <div class="input-container">
+            <label class="roboto-regular">Horário</label>
+            <input type="time" class="roboto-regular" placeholder="Horário*" required>
+          </div>
           <button type="submit" class="sign-up-btn-modal poppins-semibold c01">Cadastrar</button>
         </form>
       </div>
