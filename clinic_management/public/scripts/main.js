@@ -1,4 +1,5 @@
 import { Modal } from './modal.js';
+import { TabNav } from './tabnav.js';
 
 document.addEventListener("DOMContentLoaded", () => {
   const containerModal = document.getElementById("modal");
@@ -6,4 +7,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const modal = new Modal(containerModal, openModalBtn);
   modal.init();
+
+  const tabnav = new TabNav(".tables-change-btns button", "table");
 });

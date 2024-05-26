@@ -73,27 +73,37 @@ $adminName = $_SESSION['nome'];
         <h2 class="form-title poppins-semibold c11">Cadastrar Médico</h2>
         <div class="input-container">
           <label class="roboto-regular">Nome do médico</label>
-          <input type="text" class="roboto-regular" placeholder="Nome do usuário*" required>
+          <input type="text" class="roboto-regular" name="medico_name" placeholder="Nome do médico*" required>
         </div>
         <div class="input-container">
           <label class="roboto-regular">Especialidade</label>
-          <input type="text" class="roboto-regular" placeholder="Especialidade*" required>
+          <input type="text" class="roboto-regular" name="medico_especialidade" placeholder="Especialidade*" required>
+        </div>
+        <div class="input-container">
+          <label class="roboto-regular">CRM</label>
+          <input type="text" class="roboto-regular" name="medico_crm" placeholder="CRM*" required>
         </div>
         <div class="input-container">
           <label class="roboto-regular">Email</label>
-          <input type="email" class="roboto-regular" placeholder="Email*" required>
+          <input type="email" class="roboto-regular" name="medico_email" placeholder="Email*" required>
         </div>
         <div class="input-container">
           <label class="roboto-regular">Senha</label>
-          <input type="password" class="roboto-regular" placeholder="Senha*" required>
+          <input type="password" class="roboto-regular" name="medico_senha" placeholder="Senha*" required>
         </div>
         <button type="submit" class="sign-up-btn-modal poppins-semibold c01">Cadastrar</button>
       </form>
     </div>
 
     <div>
-      <h3 class="poppins-semibold c11">Lista de Usuários</h3>
-      <table>
+      <div class="header-tables">
+        <h3 class="poppins-semibold c11">Lista de Usuários</h3>
+        <div class="tables-change-btns">
+          <button class="poppins-semibold c01 active">Pacientes</button>
+          <button class="poppins-semibold c01">Médicos</button>
+        </div>
+      </div>
+      <table class="active">
         <thead>
           <tr class="c01 poppins-medium">
             <th class="first">#</th>
@@ -114,6 +124,31 @@ $adminName = $_SESSION['nome'];
             <td><?php echo htmlspecialchars($paciente['email']); ?></td>
             <td><?php echo htmlspecialchars($paciente['data_nascimento']); ?></td>
             <td><?php echo htmlspecialchars($paciente['sexo']); ?></td>
+            <td>Excluir</td>
+          </tr>
+          <?php endforeach; ?>
+        </tbody>
+      </table>
+
+      <table>
+        <thead>
+          <tr class="c01 poppins-medium">
+            <th class="first">#</th>
+            <th>Tipo</th>
+            <th>Nome</th>
+            <th>Email</th>
+            <th>Especialidade</th>
+            <th class="last">Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <?php foreach ($medicos as $medico) : ?>
+          <tr class="registro roboto-regular">
+            <td><?php echo htmlspecialchars($medico['id']); ?></td>
+            <td><?php echo htmlspecialchars($medico['tipo']); ?></td>
+            <td><?php echo htmlspecialchars($medico['nome']); ?></td>
+            <td><?php echo htmlspecialchars($medico['email']); ?></td>
+            <td><?php echo htmlspecialchars($medico['especialidade']); ?></td>
             <td>Excluir</td>
           </tr>
           <?php endforeach; ?>

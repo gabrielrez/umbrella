@@ -15,6 +15,4 @@ abstract class User
   public abstract function cadastrar();
 
   public abstract function getAll();
-
-  public abstract function getPermissions();
 }

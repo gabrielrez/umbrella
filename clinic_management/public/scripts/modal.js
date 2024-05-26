@@ -21,7 +21,6 @@ export class Modal {
 
   init() {
     if (this.containerModal && this.openModalBtn) {
-      console.log("init");
       this.openModalBtn.forEach(btn => {
         btn.addEventListener("click", this.openModal);
       });

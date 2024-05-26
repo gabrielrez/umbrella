@@ -4,9 +4,14 @@ require_once 'User.php';
 class Medico extends User
 {
 
-  public function __construct($id, $username, $password)
+  public $especialidade;
+  public $CRM;
+
+  public function __construct($username, $email, $especialidade, $CRM, $password)
   {
-    parent::__construct($id, $username, $password, 'medico');
+    parent::__construct($username, $email, $password, 'Médico');
+    $this->especialidade = $especialidade;
+    $this->CRM = $CRM;
   }
 
   public function getPermissions()
@@ -16,7 +21,13 @@ class Medico extends User
 
   public function cadastrar()
   {
-    //cadastrar
+    try {
+      $conn = Database::getConn();
+      $stmt = $conn->prepare("INSERT INTO medico (nome, email, especialidade, crm, senha, tipo) VALUES (?, ?, ?, ?, ?, ?)");
+      $stmt->execute([$this->username, $this->email, $this->especialidade, $this->CRM, password_hash($this->password, PASSWORD_BCRYPT), 'Médico']);
+    } catch (PDOException $e) {
+      die("Error: " . $e->getMessage());
+    }
   }
 
   public function getAll()
@@ -30,19 +41,4 @@ class Medico extends User
       die("Error: " . $e->getMessage());
     }
   }
-
-
-  // public function viewPacientes()
-  // {
-  //   $conn = Database::getConn();
-  //   $stmt = $conn->query("SELECT * FROM users WHERE role = 'paciente'");
-  //   return $stmt->fetchAll(PDO::FETCH_ASSOC);
-  // }
-
-  // public function viewAgendamentos()
-  // {
-  //   $conn = Database::getConn();
-  //   $stmt = $conn->query("SELECT * FROM agendamentos WHERE medico_id = {$this->id}");
-  //   return $stmt->fetchAll(PDO::FETCH_ASSOC);
-  // }
 }
