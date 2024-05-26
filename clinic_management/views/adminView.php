@@ -32,6 +32,7 @@ $adminName = $_SESSION['nome'];
   <header>
     <img src="/clinic_management/public/midia/img/umbrella-logo-footer.svg">
     <nav class="header-menu-admin">
+      <a href="#" class="roboto-regular c01">Ver Consultas</a>
       <a href="#" class="open-modal-btn roboto-regular c01">Agendar Consulta</a>
       <button type="submit" onclick="location.href='logout.php'" class="exit-session-btn poppins-semibold c01">Sair da Conta</button>
     </nav>
@@ -171,22 +172,22 @@ $adminName = $_SESSION['nome'];
     <div class="modal-box">
       <h2 class="modal-title poppins-semibold">Agendar Consulta</h2>
       <div class="modal-content">
-        <form method="post" action="/clinic_management/auth/register_consulta.php">
+        <form method="post" action="/clinic_management/auth/create_consulta.php">
           <div class="input-container">
-            <label class="roboto-regular">Médico CPF</label>
-            <input type="number" class="roboto-regular" placeholder="Medico CPF*" required>
+            <label class="roboto-regular">Paciente Email</label>
+            <input type="text" class="roboto-regular" name="medico_email" placeholder="Paciente Email*" required>
           </div>
           <div class="input-container">
-            <label class="roboto-regular">Paciente CPF</label>
-            <input type="number" class="roboto-regular" placeholder="Paciente CPF*" required>
+            <label class="roboto-regular">Médico CRM</label>
+            <input type="number" class="roboto-regular" name="medico_crm" placeholder="Medico CRM*" required>
           </div>
           <div class="input-container">
             <label class="roboto-regular">Data</label>
-            <input type="date" class="roboto-regular" placeholder="Data*" required>
+            <input type="date" class="roboto-regular" name="data" placeholder="Data*" required>
           </div>
           <div class="input-container">
             <label class="roboto-regular">Horário</label>
-            <input type="time" class="roboto-regular" placeholder="Horário*" required>
+            <input type="time" class="roboto-regular" name="horario" placeholder="Horário*" required>
           </div>
           <button type="submit" class="sign-up-btn-modal poppins-semibold c01">Cadastrar</button>
         </form>

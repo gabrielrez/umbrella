@@ -41,6 +41,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             exit();
           case 'medico':
             $medicoName = $user['nome'];
+            session_start();
+            $_SESSION['nome'] = $medicoName;
             header('Location: /clinic_management/views/medicoView.php');
             exit();
           case 'paciente':
@@ -49,6 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             exit();
         }
       } else {
+        header('Location: /clinic_management/views/loginView.php');
         $error = "Credenciais inválidas. Por favor, tente novamente.";
       }
     } catch (Exception $e) {

@@ -3,17 +3,28 @@ require_once 'User.php';
 
 class Consulta
 {
-  public $medico;
-  public $paciente;
+  public $medicoCRM;
+  public $pacienteEmail;
   public $data;
-  public $status;
+  public $horario;
 
-  public function __construct($medico, $paciente, $data, $status)
+  public function __construct($pacienteEmail, $medicoCRM, $data, $horario)
   {
-    $this->medico = $medico;
-    $this->paciente = $paciente;
+    $this->pacienteEmail = $pacienteEmail;
+    $this->medicoCRM = $medicoCRM;
     $this->data = $data;
-    $this->status = $status;
+    $this->horario = $horario;
+  }
+
+  public function create()
+  {
+    try {
+      $conn = Database::getConn();
+      $stmt = $conn->prepare("INSERT INTO consuta (paciente_email, medico_crm, consulta_data, horario) VALUES (?, ?, ?, ?)");
+      $stmt->execute([$this->medicoCRM, $this->pacienteEmail, $this->data, $this->horario]);
+    } catch (PDOException $e) {
+      die("Error: " . $e->getMessage());
+    }
   }
 
   public function getData()
@@ -26,13 +37,13 @@ class Consulta
     $this->data = $data;
   }
 
-  public function getStatus()
+  public function getHorario()
   {
-    return $this->status;
+    return $this->horario;
   }
 
-  public function setStatus($status)
+  public function setHorario($horario)
   {
-    $this->status = $status;
+    $this->horario = $horario;
   }
 }
