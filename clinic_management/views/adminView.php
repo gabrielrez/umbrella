@@ -124,7 +124,12 @@ $adminName = $_SESSION['nome'];
             <td><?php echo htmlspecialchars($paciente['email']); ?></td>
             <td><?php echo htmlspecialchars($paciente['data_nascimento']); ?></td>
             <td><?php echo htmlspecialchars($paciente['sexo']); ?></td>
-            <td>Excluir</td>
+            <td>
+              <form class="form-delete-table" method="post" action="/clinic_management/auth/delete_paciente.php" onsubmit="return confirm('Você tem certeza que deseja excluir este paciente?');">
+                <input type="hidden" name="id" value="<?php echo htmlspecialchars($paciente['id']); ?>">
+                <button class="roboto-regular c11" type="submit">Excluir</button>
+              </form>
+            </td>
           </tr>
           <?php endforeach; ?>
         </tbody>
@@ -149,7 +154,12 @@ $adminName = $_SESSION['nome'];
             <td><?php echo htmlspecialchars($medico['nome']); ?></td>
             <td><?php echo htmlspecialchars($medico['email']); ?></td>
             <td><?php echo htmlspecialchars($medico['especialidade']); ?></td>
-            <td>Excluir</td>
+            <td>
+              <form class="form-delete-table" method="post" action="/clinic_management/auth/delete_medico.php" onsubmit="return confirm('Você tem certeza que deseja excluir este médico?');">
+                <input type="hidden" name="id" value="<?php echo htmlspecialchars($medico['id']); ?>">
+                <button class="roboto-regular c11" type="submit">Excluir</button>
+              </form>
+            </td>
           </tr>
           <?php endforeach; ?>
         </tbody>

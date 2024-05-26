@@ -30,6 +30,17 @@ class Paciente extends User
     }
   }
 
+  public function delete($id)
+  {
+    try {
+      $conn = Database::getConn();
+      $stmt = $conn->prepare("DELETE FROM paciente WHERE id = ?");
+      $stmt->execute([$id]);
+    } catch (PDOException $e) {
+      die("Error: " . $e->getMessage());
+    }
+  }
+
   public function getAll()
   {
     try {
