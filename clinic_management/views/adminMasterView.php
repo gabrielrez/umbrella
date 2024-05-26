@@ -48,12 +48,17 @@ $clinicName = $_SESSION['nome'];
         </thead>
         <tbody>
           <?php foreach ($admins as $admin) : ?>
-            <tr class="registro roboto-regular">
-              <td><?php echo htmlspecialchars($admin['id']); ?></td>
-              <td><?php echo htmlspecialchars($admin['nome']); ?></td>
-              <td><?php echo htmlspecialchars($admin['email']); ?></td>
-              <td>Excluir</td>
-            </tr>
+          <tr class="registro roboto-regular">
+            <td><?php echo htmlspecialchars($admin['id']); ?></td>
+            <td><?php echo htmlspecialchars($admin['nome']); ?></td>
+            <td><?php echo htmlspecialchars($admin['email']); ?></td>
+            <td>
+              <form class="form-delete-table" method="post" action="/clinic_management/auth/delete_admin.php" onsubmit="return confirm('Você tem certeza que deseja excluir este admin?');">
+                <input type="hidden" name="id" value="<?php echo htmlspecialchars($admin['id']); ?>">
+                <button class="roboto-regular c11" type="submit">Excluir</button>
+              </form>
+            </td>
+          </tr>
           <?php endforeach; ?>
         </tbody>
       </table>

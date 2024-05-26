@@ -25,6 +25,17 @@ class AdminPadrao extends User
     }
   }
 
+  public function delete($id)
+  {
+    try {
+      $conn = Database::getConn();
+      $stmt = $conn->prepare("DELETE FROM admin WHERE id = ?");
+      $stmt->execute([$id]);
+    } catch (PDOException $e) {
+      die("Error: " . $e->getMessage());
+    }
+  }
+
   public function getAll()
   {
     try {
