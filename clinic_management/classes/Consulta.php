@@ -27,23 +27,26 @@ class Consulta
     }
   }
 
-  public function getData()
+  public function delete($id)
   {
-    return $this->data;
+    try {
+      $conn = Database::getConn();
+      $stmt = $conn->prepare("DELETE FROM consulta WHERE id = ?");
+      $stmt->execute([$id]);
+    } catch (PDOException $e) {
+      die("Error: " . $e->getMessage());
+    }
   }
 
-  public function setData($data)
+  public function getAll()
   {
-    $this->data = $data;
-  }
-
-  public function getHorario()
-  {
-    return $this->horario;
-  }
-
-  public function setHorario($horario)
-  {
-    $this->horario = $horario;
+    try {
+      $conn = Database::getConn();
+      $stmt = $conn->prepare("SELECT * FROM consulta");
+      $stmt->execute();
+      return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+      die("Error: " . $e->getMessage());
+    }
   }
 }

@@ -2,6 +2,7 @@
 require_once '../config/Database.php';
 require_once '../classes/Paciente.php';
 require_once '../classes/Medico.php';
+require_once '../classes/Consulta.php';
 
 session_start();
 
@@ -10,6 +11,9 @@ $pacientes = $paciente->getAll();
 
 $medico = new Medico(null, null, null, null, null);
 $medicos = $medico->getAll();
+
+$consulta = new Consulta(null, null, null, null);
+$consultas = $consulta->getAll();
 
 $adminName = $_SESSION['nome'];
 ?>
@@ -32,7 +36,6 @@ $adminName = $_SESSION['nome'];
   <header>
     <img src="/clinic_management/public/midia/img/umbrella-logo-footer.svg">
     <nav class="header-menu-admin">
-      <a href="#" class="roboto-regular c01">Ver Consultas</a>
       <a href="#" class="open-modal-btn roboto-regular c01">Agendar Consulta</a>
       <button type="submit" onclick="location.href='logout.php'" class="exit-session-btn poppins-semibold c01">Sair da Conta</button>
     </nav>
@@ -102,9 +105,10 @@ $adminName = $_SESSION['nome'];
         <div class="tables-change-btns">
           <button class="poppins-semibold c01 active">Pacientes</button>
           <button class="poppins-semibold c01">Médicos</button>
+          <button class="poppins-semibold c01">Consultas</button>
         </div>
       </div>
-      <table class="active">
+      <table class="tab active">
         <thead>
           <tr class="c01 poppins-medium">
             <th class="first">#</th>
@@ -118,25 +122,25 @@ $adminName = $_SESSION['nome'];
         </thead>
         <tbody>
           <?php foreach ($pacientes as $paciente) : ?>
-          <tr class="registro roboto-regular">
-            <td><?php echo htmlspecialchars($paciente['id']); ?></td>
-            <td><?php echo htmlspecialchars($paciente['tipo']); ?></td>
-            <td><?php echo htmlspecialchars($paciente['nome']); ?></td>
-            <td><?php echo htmlspecialchars($paciente['email']); ?></td>
-            <td><?php echo htmlspecialchars($paciente['data_nascimento']); ?></td>
-            <td><?php echo htmlspecialchars($paciente['sexo']); ?></td>
-            <td>
-              <form class="form-delete-table" method="post" action="/clinic_management/auth/delete_paciente.php" onsubmit="return confirm('Você tem certeza que deseja excluir este paciente?');">
-                <input type="hidden" name="id" value="<?php echo htmlspecialchars($paciente['id']); ?>">
-                <button class="roboto-regular c11" type="submit">Excluir</button>
-              </form>
-            </td>
-          </tr>
+            <tr class="registro roboto-regular">
+              <td><?php echo htmlspecialchars($paciente['id']); ?></td>
+              <td><?php echo htmlspecialchars($paciente['tipo']); ?></td>
+              <td><?php echo htmlspecialchars($paciente['nome']); ?></td>
+              <td><?php echo htmlspecialchars($paciente['email']); ?></td>
+              <td><?php echo htmlspecialchars($paciente['data_nascimento']); ?></td>
+              <td><?php echo htmlspecialchars($paciente['sexo']); ?></td>
+              <td>
+                <form class="form-delete-table" method="post" action="/clinic_management/auth/delete_paciente.php" onsubmit="return confirm('Você tem certeza que deseja excluir este paciente?');">
+                  <input type="hidden" name="id" value="<?php echo htmlspecialchars($paciente['id']); ?>">
+                  <button class="roboto-regular c11" type="submit">Excluir</button>
+                </form>
+              </td>
+            </tr>
           <?php endforeach; ?>
         </tbody>
       </table>
 
-      <table>
+      <table class="tab">
         <thead>
           <tr class="c01 poppins-medium">
             <th class="first">#</th>
@@ -150,20 +154,50 @@ $adminName = $_SESSION['nome'];
         </thead>
         <tbody>
           <?php foreach ($medicos as $medico) : ?>
-          <tr class="registro roboto-regular">
-            <td><?php echo htmlspecialchars($medico['id']); ?></td>
-            <td><?php echo htmlspecialchars($medico['tipo']); ?></td>
-            <td><?php echo htmlspecialchars($medico['nome']); ?></td>
-            <td><?php echo htmlspecialchars($medico['email']); ?></td>
-            <td><?php echo htmlspecialchars($medico['crm']); ?></td>
-            <td><?php echo htmlspecialchars($medico['especialidade']); ?></td>
-            <td>
-              <form class="form-delete-table" method="post" action="/clinic_management/auth/delete_medico.php" onsubmit="return confirm('Você tem certeza que deseja excluir este médico?');">
-                <input type="hidden" name="id" value="<?php echo htmlspecialchars($medico['id']); ?>">
-                <button class="roboto-regular c11" type="submit">Excluir</button>
-              </form>
-            </td>
+            <tr class="registro roboto-regular">
+              <td><?php echo htmlspecialchars($medico['id']); ?></td>
+              <td><?php echo htmlspecialchars($medico['tipo']); ?></td>
+              <td><?php echo htmlspecialchars($medico['nome']); ?></td>
+              <td><?php echo htmlspecialchars($medico['email']); ?></td>
+              <td><?php echo htmlspecialchars($medico['crm']); ?></td>
+              <td><?php echo htmlspecialchars($medico['especialidade']); ?></td>
+              <td>
+                <form class="form-delete-table" method="post" action="/clinic_management/auth/delete_medico.php" onsubmit="return confirm('Você tem certeza que deseja excluir este médico?');">
+                  <input type="hidden" name="id" value="<?php echo htmlspecialchars($medico['id']); ?>">
+                  <button class="roboto-regular c11" type="submit">Excluir</button>
+                </form>
+              </td>
+            </tr>
+          <?php endforeach; ?>
+        </tbody>
+      </table>
+
+      <table class="tab">
+        <thead>
+          <tr class="c01 poppins-medium">
+            <th class="first">#</th>
+            <th>Data</th>
+            <th>Horário</th>
+            <th>Médico</th>
+            <th>Paciente</th>
+            <th class="last">Ações</th>
           </tr>
+        </thead>
+        <tbody>
+          <?php foreach ($consultas as $consulta) : ?>
+            <tr class="registro roboto-regular">
+              <td><?php echo htmlspecialchars($consulta['id']); ?></td>
+              <td><?php echo htmlspecialchars($consulta['data_consulta']); ?></td>
+              <td><?php echo htmlspecialchars($consulta['horario_consulta']); ?></td>
+              <td><?php echo htmlspecialchars($consulta['medico_crm']); ?></td>
+              <td><?php echo htmlspecialchars($consulta['paciente_email']); ?></td>
+              <td>
+                <form class="form-delete-table" method="post" action="/clinic_management/auth/delete_consulta.php" onsubmit="return confirm('Você tem certeza que deseja excluir esta consulta?');">
+                  <input type="hidden" name="id" value="<?php echo htmlspecialchars($consulta['id']); ?>">
+                  <button class="roboto-regular c11" type="submit">Excluir</button>
+                </form>
+              </td>
+            </tr>
           <?php endforeach; ?>
         </tbody>
       </table>
