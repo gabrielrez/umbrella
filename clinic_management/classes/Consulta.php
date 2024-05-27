@@ -20,8 +20,8 @@ class Consulta
   {
     try {
       $conn = Database::getConn();
-      $stmt = $conn->prepare("INSERT INTO consuta (paciente_email, medico_crm, consulta_data, horario) VALUES (?, ?, ?, ?)");
-      $stmt->execute([$this->medicoCRM, $this->pacienteEmail, $this->data, $this->horario]);
+      $stmt = $conn->prepare("INSERT INTO consulta (paciente_email, medico_crm, data_consulta, horario_consulta) VALUES (?, ?, ?, ?)");
+      $stmt->execute([$this->pacienteEmail, $this->medicoCRM, $this->data, $this->horario]);
     } catch (PDOException $e) {
       die("Error: " . $e->getMessage());
     }

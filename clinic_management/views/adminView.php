@@ -143,6 +143,7 @@ $adminName = $_SESSION['nome'];
             <th>Tipo</th>
             <th>Nome</th>
             <th>Email</th>
+            <th>CRM</th>
             <th>Especialidade</th>
             <th class="last">Ações</th>
           </tr>
@@ -154,6 +155,7 @@ $adminName = $_SESSION['nome'];
             <td><?php echo htmlspecialchars($medico['tipo']); ?></td>
             <td><?php echo htmlspecialchars($medico['nome']); ?></td>
             <td><?php echo htmlspecialchars($medico['email']); ?></td>
+            <td><?php echo htmlspecialchars($medico['crm']); ?></td>
             <td><?php echo htmlspecialchars($medico['especialidade']); ?></td>
             <td>
               <form class="form-delete-table" method="post" action="/clinic_management/auth/delete_medico.php" onsubmit="return confirm('Você tem certeza que deseja excluir este médico?');">
@@ -175,7 +177,7 @@ $adminName = $_SESSION['nome'];
         <form method="post" action="/clinic_management/auth/create_consulta.php">
           <div class="input-container">
             <label class="roboto-regular">Paciente Email</label>
-            <input type="text" class="roboto-regular" name="medico_email" placeholder="Paciente Email*" required>
+            <input type="text" class="roboto-regular" name="paciente_email" placeholder="Paciente Email*" required>
           </div>
           <div class="input-container">
             <label class="roboto-regular">Médico CRM</label>

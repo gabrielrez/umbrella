@@ -10,8 +10,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   if ($pacienteEmail && $medicoCRM && $data && $horario) {
     $consulta = new Consulta($pacienteEmail, $medicoCRM, $data, $horario);
-    $consukta->create();
-    header('Location: /clinic_management/views/adminView.php?adminName=' . urlencode($adminName));
+    $consulta->create();
+    header('Location: /clinic_management/views/adminView.php');
+    exit;
   } else {
     die("Error: All fields are required.");
   }
