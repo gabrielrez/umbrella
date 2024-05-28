@@ -43,6 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $medicoName = $user['nome'];
             session_start();
             $_SESSION['nome'] = $medicoName;
+            $_SESSION['crm'] = $user['crm'];
             header('Location: /clinic_management/views/medicoView.php');
             exit();
           case 'paciente':

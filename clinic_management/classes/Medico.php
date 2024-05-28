@@ -52,4 +52,16 @@ class Medico extends User
       die("Error: " . $e->getMessage());
     }
   }
+
+  public function getConsultas($CRM)
+  {
+    try {
+      $conn = Database::getConn();
+      $stmt = $conn->prepare("SELECT * FROM consulta WHERE medico_crm = ?");
+      $stmt->execute([$CRM]);
+      return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+      die("Error: " . $e->getMessage());
+    }
+  }
 }
