@@ -44,10 +44,8 @@ class Medico extends User
   public function getAll()
   {
     try {
-      $conn = Database::getConn();
-      $stmt = $conn->prepare("SELECT * FROM medico");
-      $stmt->execute();
-      return $stmt->fetchAll(PDO::FETCH_ASSOC);
+      $conn = Database::getHefestos();
+      return $conn->tabela('medico')->buscarTodos();
     } catch (PDOException $e) {
       die("Error: " . $e->getMessage());
     }
@@ -56,10 +54,8 @@ class Medico extends User
   public function getConsultas($CRM)
   {
     try {
-      $conn = Database::getConn();
-      $stmt = $conn->prepare("SELECT * FROM consulta WHERE medico_crm = ?");
-      $stmt->execute([$CRM]);
-      return $stmt->fetchAll(PDO::FETCH_ASSOC);
+      $conn = Database::getHefestos();
+      return $conn->tabela('consulta')->where($CRM)->buscarTodos();
     } catch (PDOException $e) {
       die("Error: " . $e->getMessage());
     }

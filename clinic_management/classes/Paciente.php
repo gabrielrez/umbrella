@@ -22,9 +22,10 @@ class Paciente extends User
   public function cadastrar()
   {
     try {
-      $conn = Database::getConn();
-      $stmt = $conn->prepare("INSERT INTO paciente (nome, email, data_nascimento, sexo, senha, tipo) VALUES (?, ?, ?, ?, ?, ?)");
-      $stmt->execute([$this->username, $this->email, $this->age, $this->sexo, password_hash($this->password, PASSWORD_BCRYPT), 'Paciente']);
+      $conn = Database::getHefestos();
+      $paciente = ['nome' => $this->username, 'email' => $this->email, 'data_nascimento' => $this->age, 'sexo' => $this->sexo, 'senha' => password_hash($this->password, PASSWORD_BCRYPT), 'tipo' => 'Paciente'];
+      $conn->tabela('paciente')->insert($paciente);
+
     } catch (PDOException $e) {
       die("Error: " . $e->getMessage());
     }
@@ -33,9 +34,8 @@ class Paciente extends User
   public function delete($id)
   {
     try {
-      $conn = Database::getConn();
-      $stmt = $conn->prepare("DELETE FROM paciente WHERE id = ?");
-      $stmt->execute([$id]);
+      $conn = Database::getHefestos();
+      $conn->tabela('paciente')->delete(['id' => $id]);
     } catch (PDOException $e) {
       die("Error: " . $e->getMessage());
     }
