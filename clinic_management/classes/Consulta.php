@@ -19,9 +19,9 @@ class Consulta
   public function create()
   {
     try {
-      $conn = Database::getConn();
-      $stmt = $conn->prepare("INSERT INTO consulta (paciente_email, medico_crm, data_consulta, horario_consulta) VALUES (?, ?, ?, ?)");
-      $stmt->execute([$this->pacienteEmail, $this->medicoCRM, $this->data, $this->horario]);
+      $conn = Database::getHefestos();
+      $consulta = ['paciente_email' => $this->pacienteEmail, 'medico_crm' => $this->medicoCRM, 'data_consulta' => $this->data, 'horario_consulta' => $this->horario];
+      $conn->tabela('consulta')->insert($consulta);
     } catch (PDOException $e) {
       die("Error: " . $e->getMessage());
     }
@@ -30,9 +30,8 @@ class Consulta
   public function delete($id)
   {
     try {
-      $conn = Database::getConn();
-      $stmt = $conn->prepare("DELETE FROM consulta WHERE id = ?");
-      $stmt->execute([$id]);
+      $conn = Database::getHefestos();
+      $conn->tabela('consulta')->delete(['id' => $id]);
     } catch (PDOException $e) {
       die("Error: " . $e->getMessage());
     }
@@ -41,10 +40,8 @@ class Consulta
   public function getAll()
   {
     try {
-      $conn = Database::getConn();
-      $stmt = $conn->prepare("SELECT * FROM consulta");
-      $stmt->execute();
-      return $stmt->fetchAll(PDO::FETCH_ASSOC);
+      $conn = Database::getHefestos();
+      return $conn->tabela('consulta')->buscarTodos();
     } catch (PDOException $e) {
       die("Error: " . $e->getMessage());
     }

@@ -15,9 +15,6 @@ $consultas = $medico->getConsultas($crm);
 $paciente = new Paciente(null, null, null, null, null);
 $pacientes = $paciente->getAll();
 
-// $consulta = new Consulta(null, null, null, null);
-// $consultas = $consulta->getAll();
-
 $medicoName = $_SESSION['nome'];
 ?>
 
@@ -39,8 +36,6 @@ $medicoName = $_SESSION['nome'];
   <header>
     <img src="/clinic_management/public/midia/img/umbrella-logo-footer.svg">
     <nav class="header-menu-admin">
-      <a href="#" class="roboto-regular c01">Ver Pacientes</a>
-      <a href="#" class="open-modal-btn roboto-regular c01">Ver Consultas</a>
       <button type="submit" onclick="location.href='logout.php'" class="exit-session-btn poppins-semibold c01">Sair da Conta</button>
     </nav>
   </header>

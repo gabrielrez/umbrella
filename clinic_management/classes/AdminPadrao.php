@@ -17,9 +17,9 @@ class AdminPadrao extends User
   public function cadastrar()
   {
     try {
-      $conn = Database::getConn();
-      $stmt = $conn->prepare("INSERT INTO admin (nome, email, senha) VALUES (?, ?, ?)");
-      $stmt->execute([$this->username, $this->email, password_hash($this->password, PASSWORD_BCRYPT)]);
+      $conn = Database::getHefestos();
+      $admin = ['nome' => $this->username, 'email' => $this->email, 'senha' => password_hash($this->password, PASSWORD_BCRYPT), 'tipo' => 'Paciente'];
+      $conn->tabela('admin')->insert($admin);
     } catch (PDOException $e) {
       die("Error: " . $e->getMessage());
     }
@@ -28,9 +28,8 @@ class AdminPadrao extends User
   public function delete($id)
   {
     try {
-      $conn = Database::getConn();
-      $stmt = $conn->prepare("DELETE FROM admin WHERE id = ?");
-      $stmt->execute([$id]);
+      $conn = Database::getHefestos();
+      $conn->tabela('admin')->delete(['id' => $id]);
     } catch (PDOException $e) {
       die("Error: " . $e->getMessage());
     }
@@ -39,10 +38,8 @@ class AdminPadrao extends User
   public function getAll()
   {
     try {
-      $conn = Database::getConn();
-      $stmt = $conn->prepare("SELECT * FROM admin");
-      $stmt->execute();
-      return $stmt->fetchAll(PDO::FETCH_ASSOC);
+      $conn = Database::getHefestos();
+      return $conn->tabela('admin')->buscarTodos();
     } catch (PDOException $e) {
       die("Error: " . $e->getMessage());
     }

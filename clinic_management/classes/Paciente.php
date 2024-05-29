@@ -25,7 +25,6 @@ class Paciente extends User
       $conn = Database::getHefestos();
       $paciente = ['nome' => $this->username, 'email' => $this->email, 'data_nascimento' => $this->age, 'sexo' => $this->sexo, 'senha' => password_hash($this->password, PASSWORD_BCRYPT), 'tipo' => 'Paciente'];
       $conn->tabela('paciente')->insert($paciente);
-
     } catch (PDOException $e) {
       die("Error: " . $e->getMessage());
     }
@@ -44,10 +43,8 @@ class Paciente extends User
   public function getAll()
   {
     try {
-      $conn = Database::getConn();
-      $stmt = $conn->prepare("SELECT * FROM paciente");
-      $stmt->execute();
-      return $stmt->fetchAll(PDO::FETCH_ASSOC);
+      $conn = Database::getHefestos();
+      return $conn->tabela('paciente')->buscarTodos();
     } catch (PDOException $e) {
       die("Error: " . $e->getMessage());
     }

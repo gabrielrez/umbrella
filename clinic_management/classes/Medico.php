@@ -22,9 +22,9 @@ class Medico extends User
   public function cadastrar()
   {
     try {
-      $conn = Database::getConn();
-      $stmt = $conn->prepare("INSERT INTO medico (nome, email, especialidade, crm, senha, tipo) VALUES (?, ?, ?, ?, ?, ?)");
-      $stmt->execute([$this->username, $this->email, $this->especialidade, $this->CRM, password_hash($this->password, PASSWORD_BCRYPT), 'Médico']);
+      $conn = Database::getHefestos();
+      $medico = ['nome' => $this->username, 'email' => $this->email, 'especialidade' => $this->especialidade, 'crm' => $this->CRM, 'senha' => password_hash($this->password, PASSWORD_BCRYPT), 'tipo' => 'Médico'];
+      $conn->tabela('medico')->insert($medico);
     } catch (PDOException $e) {
       die("Error: " . $e->getMessage());
     }
@@ -33,9 +33,8 @@ class Medico extends User
   public function delete($id)
   {
     try {
-      $conn = Database::getConn();
-      $stmt = $conn->prepare("DELETE FROM medico WHERE id = ?");
-      $stmt->execute([$id]);
+      $conn = Database::getHefestos();
+      $conn->tabela('medico')->delete(['id' => $id]);
     } catch (PDOException $e) {
       die("Error: " . $e->getMessage());
     }

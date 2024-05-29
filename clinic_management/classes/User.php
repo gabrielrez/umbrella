@@ -14,5 +14,7 @@ abstract class User
 
   public abstract function cadastrar();
 
+  public abstract function delete($id);
+
   public abstract function getAll();
 }
