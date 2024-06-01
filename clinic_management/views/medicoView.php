@@ -53,7 +53,7 @@ $medicoName = $_SESSION['nome'];
           <th>Data da Consulta</th>
           <th>Horário</th>
           <th>Paciente</th>
-          <th class="last">Histórico</th>
+          <th class="last">Informações</th>
         </tr>
       </thead>
       <tbody>

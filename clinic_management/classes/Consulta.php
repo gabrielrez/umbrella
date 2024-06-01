@@ -37,11 +37,13 @@ class Consulta
     }
   }
 
-  public function getAll()
+  public function getAll($clinicaId)
   {
     try {
-      $conn = Database::getHefestos();
-      return $conn->tabela('consulta')->buscarTodos();
+      $conn = Database::getConn();
+      $stmt = $conn->prepare("SELECT * FROM consulta WHERE clinica_id = ?");
+      $stmt->execute([$clinicaId]);
+      return $stmt->fetchAll(PDO::FETCH_ASSOC);
     } catch (PDOException $e) {
       die("Error: " . $e->getMessage());
     }

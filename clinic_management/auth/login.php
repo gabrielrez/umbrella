@@ -36,12 +36,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             exit();
           case 'admin':
             $adminName = $user['nome'];
+            $clinicaId = $user['clinica_id'];
             session_start();
             $_SESSION['nome'] = $adminName;
+            $_SESSION['clinica_id'] = $clinicaId;
             header('Location: /clinic_management/views/adminView.php?adminName=' . urlencode($adminName));
             exit();
           case 'medico':
             $medicoName = $user['nome'];
+            $clinicaId = $user['clinica_id'];
             session_start();
             $_SESSION['nome'] = $medicoName;
             $_SESSION['crm'] = $user['crm'];
@@ -49,9 +52,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             exit();
           case 'paciente':
             $pacienteName = $user['nome'];
+            $pacienteEmail = $user['email'];
+            $pacienteDt = $user['data_nascimento'];
+            $pacienteSexo = $user['sexo'];
             session_start();
             $_SESSION['nome'] = $user['nome'];
             $_SESSION['email'] = $user['email'];
+            $_SESSION['data_nascimento'] = $user['data_nascimento'];
+            $_SESSION['sexo'] = $user['sexo'];
             header('Location: /clinic_management/views/pacienteView.php?pacienteName=' . urlencode($pacienteName));
             exit();
         }

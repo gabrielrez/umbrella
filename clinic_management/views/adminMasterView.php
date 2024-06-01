@@ -5,9 +5,10 @@ require_once '../classes/AdminPadrao.php';
 session_start();
 
 $clinicName = $_SESSION['nome'];
+$clinicaId = $_SESSION['id'];
 
 $adminPadrao = new AdminPadrao(null, null, null, null);
-$admins = $adminPadrao->getAll();
+$admins = $adminPadrao->getAll($clinicaId);
 ?>
 
 <!DOCTYPE html>

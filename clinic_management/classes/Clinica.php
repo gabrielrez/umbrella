@@ -26,7 +26,7 @@ class Clinica extends User
   public function getAll()
   {
     $conn = Database::getHefestos();
-    return $conn->tabela('clinic')->buscarTodos();
+    return $conn->tabela('clinic')->todos();
   }
 
   public function delete($id)

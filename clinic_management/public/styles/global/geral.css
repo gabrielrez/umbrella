@@ -96,6 +96,29 @@ li {
   color: var(--cBase02);
 }
 
+.perfil-title {
+  text-align: center;
+}
+
+.perfil-title::after {
+  content: "";
+  width: 160px;
+  height: 4px;
+  background-color: var(--cBase02);
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 16px;
+}
+
+.info-container {
+  margin-top: 32px;
+}
+
+.info-container ul li {
+  margin: 16px 0px;
+}
+
 button {
   border: none;
   cursor: pointer;

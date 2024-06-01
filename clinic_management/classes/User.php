@@ -16,5 +16,5 @@ abstract class User
 
   public abstract function delete($id);
 
-  public abstract function getAll();
+  public abstract function getAll($clinicaId);
 }

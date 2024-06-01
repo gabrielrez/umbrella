@@ -35,11 +35,13 @@ class Paciente extends User
     }
   }
 
-  public function getAll()
+  public function getAll($clinicaId)
   {
     try {
-      $conn = Database::getHefestos();
-      return $conn->tabela('paciente')->buscarTodos();
+      $conn = Database::getConn();
+      $stmt = $conn->prepare("SELECT * FROM paciente WHERE clinica_id = ?");
+      $stmt->execute([$clinicaId]);
+      return $stmt->fetchAll(PDO::FETCH_ASSOC);
     } catch (PDOException $e) {
       die("Error: " . $e->getMessage());
     }

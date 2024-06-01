@@ -8,6 +8,8 @@ session_start();
 
 $pacienteName = $_SESSION['nome'];
 $pacienteEmail = $_SESSION['email'];
+$pacienteDt = $_SESSION['data_nascimento'];
+$pacienteSexo = $_SESSION['sexo'];
 
 // var_dump($_SESSION);
 
@@ -33,7 +35,7 @@ $consultas = $paciente->getConsultas($pacienteEmail);
   <header>
     <img src="/clinic_management/public/midia/img/umbrella-logo-footer.svg">
     <nav class="header-menu-admin">
-      <a href="#" class="roboto-regular c01">Meu Perfil</a>
+      <a href="#" class="open-modal-btn roboto-regular c01">Meu Perfil</a>
       <button type="submit" onclick="location.href='logout.php'" class="exit-session-btn poppins-semibold c01">Sair da Conta</button>
     </nav>
   </header>
@@ -66,6 +68,30 @@ $consultas = $paciente->getConsultas($pacienteEmail);
         </tbody>
       </table>
 
+    </div>
+
+    <div id="modal" class="modal-container">
+      <div class="modal-box">
+        <h2 class="modal-title perfil-title poppins-semibold">Meu Perfil</h2>
+        <div class="info-container">
+          <ul>
+            <li class="poppins-semibold c11">Nome: <span class="roboto-regular c11"><?php echo htmlspecialchars($pacienteName); ?></span></li>
+            <li class="poppins-semibold c11">Email: <span class="roboto-regular c11"><?php echo htmlspecialchars($pacienteEmail); ?></span></li>
+            <li class="poppins-semibold c11">Data de nascimento: <span class="roboto-regular c11"><?php echo htmlspecialchars($pacienteDt); ?></span></li>
+            <li class="poppins-semibold c11">Sexo: <span class="roboto-regular c11"><?php
+
+                                                                                    if ($pacienteSexo == 'm') {
+                                                                                      echo "Masculino";
+                                                                                    } else {
+                                                                                      echo "Feminino";
+                                                                                    }
+
+                                                                                    ?></span></li>
+          </ul>
+        </div>
+        <div class="modal-content">
+        </div>
+      </div>
     </div>
 
     <script type="module" src="../public/scripts/main.js"></script>

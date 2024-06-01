@@ -7,19 +7,21 @@
 */
 class HefestosORM
 {
-    private static ?self $instancia = null;
+    protected static ?self $instancia = null;
     protected ?PDO $conexao;
     protected ?PDOStatement $query_info;
     protected string $tabela;
     protected string $query = '';
     protected array $params = [];
-    private bool $como_array = true;
-    private bool $checar_nome_tabela = true;
-    private int $fetch_mode = PDO::FETCH_ASSOC;
+    protected string $classe_de_retorno;
+    protected bool $checar_nome_tabela = true;
+    protected bool $como_array = true;
+    protected int $fetch_mode = PDO::FETCH_ASSOC;
 
     /**
-     * Instancia o PDO. Recebe um array de configurações com as chaves 
-     * 'driver' (sqlite ou mysql), 'sqlite' no caso 
+     * Busca o array de conexão com o banco de dados e instancia o PDO.
+     * Pode receber uma conexão alternativa na forma de um array 
+     * com as mesmas chaves do padrão na pasta config.
      * @author brunoggdev
     */
     public function __construct(array $db_config)
@@ -32,8 +34,10 @@ class HefestosORM
     }
 
 
+
+
     /**
-     * Retorna um array com o dsn, usuario e senha baseados nas configurações do arquivo app/config/database.php
+     * Formata as informações de conexão com o banco, retornando o dsn, usuario e senha
      * @author Brunoggdev
     */
     private function formatarConexao(array $config):array
@@ -46,22 +50,32 @@ class HefestosORM
     }
 
 
+
+
     /**
      * Retorna a conexão ativa do banco de dados (singleton).
      * @param array $config Array associativo com as chaves 'driver' (sqlite ou mysql),
      * 'usuario', 'senha', 'host' e 'nome_db' se for mysql ou, caso contrário, 'sqlite' com o caminho do arquivo.
      * @author Brunoggdev
     */
-    public static function instancia(array $config):self
+    public static function instancia(?array $config = null):self
     {
-        if (is_null(self::$instancia)) {
-            self::$instancia = new self($config);
+        if (!is_null(self::$instancia)) {
+            self::$instancia->tabela('');
+
+            return self::$instancia;
         }
-        
-        self::$instancia->tabela('');
+
+        if (is_null($config)) {
+            throw new Exception('Configurações de conexão ao banco de dados não recebidas...');
+        }
+
+        self::$instancia = new self($config);
 
         return self::$instancia;
     }
+
+
 
 
     /**
@@ -75,6 +89,8 @@ class HefestosORM
     }
 
 
+
+
     /**
      * Define a tabela na qual o as próximas consultas serão executadas
     */
@@ -84,6 +100,8 @@ class HefestosORM
 
         return $this;
     }
+
+
 
 
     /**
@@ -98,6 +116,7 @@ class HefestosORM
 
         return $this;
     }
+
 
 
 
@@ -122,13 +141,14 @@ class HefestosORM
     }
    
    
+
    
     /**
      * Cria uma sql para DELETE
      * @return bool true se sucesso, false caso contrário;
      * @author Brunoggdev
     */
-    public function delete(array $where = []):bool
+    public function delete(array|string $where):bool
     {
 
         $this->query = "DELETE FROM $this->tabela";
@@ -140,13 +160,14 @@ class HefestosORM
 
 
 
+
     /**
     * Adiciona um UPDATE na consulta
     * @author brunoggdev
     */
-    public function update(array $params, array $where = []): bool
+    public function update(array|object $params, array $where = []): bool
     {
-        $this->params = $params;
+        $this->params = (array) $params;
     
         $novos_valores = implode(', ', array_map(fn($key) => "$key = :$key", array_keys($params)));
     
@@ -155,6 +176,7 @@ class HefestosORM
         
         return $this->executarQuery();
     }
+
 
 
 
@@ -169,6 +191,10 @@ class HefestosORM
     {
         if (empty($params)) {
             return $this;
+        }
+
+        if (empty($this->query)) {
+            $this->select();
         }
 
         if (! str_contains($this->query, 'WHERE') ) {
@@ -203,6 +229,8 @@ class HefestosORM
     }
 
 
+
+
     /**
     * Adiciona um OR na consulta e em seguida um where novamente
     * @author Brunoggdev
@@ -214,6 +242,8 @@ class HefestosORM
         
         return $this;
     }
+
+
 
 
     /**
@@ -228,6 +258,8 @@ class HefestosORM
     }
 
 
+
+
     /**
     * Adiciona um ORDER BY na query
     * @author brunoggdev
@@ -240,28 +272,37 @@ class HefestosORM
     }
 
 
+
+
     /**
      * Recebe uma sql completa para consultar no banco de dados.
      * Se informado um objeto como parâmetro ele será convertido para array.
      * @example $sql SELECT * FROM users WHERE id >= :id
      * @example $params ['id' => 1]
+     * @return bool|PDOStatement false em caso de falha ou PDOStatement em caso de sucesso (que avalila para true)
      * @author brunoggdev
     */
-    public function executar(string $sql, array|object $params = [])
+    public function executar(string $sql, array|object $params = []): bool|PDOStatement
     {
         $this->query = $sql;
         $this->params = (array) $params;
         $this->checar_nome_tabela = false;
-        
-        return $this->executarQuery();
+
+        if (!$this->executarQuery()) {
+            return false;
+        }
+
+        return $this->query_info;
     }
+
+
 
 
     /**
      * Pega o primeiro resultado da consulta, podendo retornar uma coluna especifica
      * @author brunoggdev
     */
-    public function primeiro(?string $coluna = null)
+    public function primeiro(?string $coluna = null): mixed
     {
         $resultado = $this->executarQuery(true)->fetch($this->fetch_mode);
 
@@ -269,8 +310,10 @@ class HefestosORM
             return $resultado[$coluna] ?? null;
         }
 
-        return $this->como_array ? $resultado : new Colecao($resultado);
+        return $this->como_array ? $resultado : $this->retornarObjeto($resultado);
     }
+
+
 
 
     /**
@@ -279,17 +322,35 @@ class HefestosORM
      * @example $coluna_unica $db->tabela('pets')->select('nome')->todos(true);  //retorna diretamente um array com todos os nomes
      * @author brunoggdev
     */
-    public function todos(bool $coluna_unica = false)
+    public function todos(bool $coluna_unica = false): array
     {
         if (empty($this->query)) {
-            throw new Exception('Parece que nenhuma consulta foi montada para retornar todos os seus resultados...');
+            $this->select(['*']);
         }
 
         $fetch_mode = $coluna_unica ? PDO::FETCH_COLUMN : $this->fetch_mode;
         $resultado = $this->executarQuery(true)->fetchAll($fetch_mode);
 
-        return $this->como_array ? $resultado : new Colecao($resultado);
+        return $this->como_array ? $resultado : $this->retornarObjeto($resultado, true);
     }
+
+
+
+    /**
+     * Retorna o resultado da consulta no formato do objeto definido
+    */
+    public function retornarObjeto(array $resultado, bool $todos = false):mixed
+    {
+
+        $classe = $this->classe_de_retorno;
+
+        if ($todos) {
+            return array_map(fn($resultado) => new $classe($resultado), $resultado);
+        }
+
+        return new $classe($resultado);
+    }
+
 
 
     /**
@@ -301,9 +362,11 @@ class HefestosORM
     {
 
         if (empty($this->tabela) && $this->checar_nome_tabela) {
-            $this->checar_nome_tabela = true;
-            throw new \Exception('Não foi definida a tabela onde deve ser realizada a consulta.');
+            throw new Exception('Não foi definida a tabela onde deve ser realizada a consulta.');
         }
+
+        // resetando a checagem sempre que esta função for chamada
+        $this->checar_nome_tabela = true;
 
         $query = $this->conexao->prepare($this->query);
         
@@ -311,11 +374,14 @@ class HefestosORM
         
         $resultado = $query->execute($this->params);
 
-        $this->params = [];
         $this->query_info = $query;
+        $this->query = '';
+        $this->params = [];
 
         return $retornar_query ? $query : $resultado;
     }
+
+
 
 
     /**
@@ -328,6 +394,8 @@ class HefestosORM
     }
 
 
+
+
     /**
      * Retorna o número de linhas afetadas pela ultima sql
      * @author Brunoggdev
@@ -336,6 +404,8 @@ class HefestosORM
     {
         return $this->query_info->rowCount();
     }
+
+
 
 
     /**
@@ -348,6 +418,8 @@ class HefestosORM
     }
 
 
+
+
     /**
     * Retorna os erros que ocorreram durante a execução da SQL
     * @author brunoggdev
@@ -356,6 +428,8 @@ class HefestosORM
     {
         return $this->query_info->errorInfo();
     }
+
+
 
 
     /**
@@ -370,16 +444,23 @@ class HefestosORM
     }
 
     
+
+
     /**
-    * Define o retorno do banco de dados como um objeto do tipo colecao
-    * @author Brunoggdev
+     * Define o retorno do banco de dados como um objeto (ou array de objetos) da classe informada;
+     * O array de resultados será passado para o construtor da classe desejada.
+     * @param string $classe SuaClasse::class - O "nome qualificado" da classe desejada
+     * @author Brunoggdev
     */
-    public function comoColecao():self
+    public function comoObjeto(string $classe):self
     {
         $this->como_array = false;
+        $this->classe_de_retorno = $classe;
 
         return $this;
     }
+
+
 
 
     /**
@@ -396,32 +477,21 @@ class HefestosORM
 
 
     /**
-    * Retorna todas as linhas da tabela desejada com todas as colunas ou colunas especificas
-    * @author Brunoggdev
-    */
-    public function buscarTodos(?array $colunas = ['*']):mixed
-    {
-        return $this->select($colunas)->todos();
-    }
-
-
-
-    /**
-     * Retorna da tabela desejada a linha com o id informado ou, opcionalmente, uma coluna especifica.
+     * Retorna da tabela desejada a linha (ou coluna especifica) com o id informado, podendo retornar uma coluna especifica
      * @author Brunoggdev
     */
     public function buscar(int|string $id, ?string $coluna = null):mixed
     {
-        return $this->where(['id' => $id])->primeiro($coluna);
+        return $this->primeiroOnde(['id' => $id], $coluna);
     }
 
 
 
     /**
-     * Retorna o primeiro resultado para o 'where' informado
+     * Retorna o primeiro resultado para o 'where' informado, podendo retornar uma coluna especifica
     */
-    public function primeiroOnde(array|string $where):mixed
+    public function primeiroOnde(array|string $where, ?string $coluna = null):mixed
     {
-        return $this->where($where)->primeiro();
+        return $this->where($where)->primeiro($coluna);
     }
 }
