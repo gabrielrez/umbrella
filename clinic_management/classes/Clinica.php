@@ -12,11 +12,6 @@ class Clinica extends User
     $this->cnpj = $cnpj;
   }
 
-  public function getPermissions()
-  {
-    return ['manage_admins'];
-  }
-
   public function cadastrar()
   {
     try {

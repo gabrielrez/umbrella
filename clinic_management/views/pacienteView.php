@@ -2,17 +2,17 @@
 require_once '../config/Database.php';
 require_once '../classes/Paciente.php';
 require_once '../classes/Medico.php';
+require_once '../classes/Consulta.php';
 
 session_start();
 
-$medico = new Medico(null, null, null, null, null);
-$medicos = $medico->getAll();
+$pacienteName = $_SESSION['nome'];
+$pacienteEmail = $_SESSION['email'];
+
+// var_dump($_SESSION);
 
 $paciente = new Paciente(null, null, null, null, null);
-$pacientes = $paciente->getAll();
-
-// $pacienteName = $_SESSION['nome'];
-$pacienteName = 'Nome';
+$consultas = $paciente->getConsultas($pacienteEmail);
 ?>
 
 <!DOCTYPE html>
@@ -41,30 +41,34 @@ $pacienteName = 'Nome';
   <div class="container">
     <h1 class="wellcome-title poppins-semibold c11">Bem vindo, <?php echo htmlspecialchars($pacienteName); ?></h1>
 
-    <table class="active">
-      <thead>
-        <tr class="c01 poppins-medium">
-          <th class="first">#</th>
-          <th>Data da Consulta</th>
-          <th>Horário</th>
-          <th class="last">Paciente</th>
-        </tr>
-      </thead>
-      <tbody>
-        <?php foreach ($pacientes as $paciente) : ?>
-          <tr class="registro roboto-regular">
-            <td><?php echo htmlspecialchars($paciente['id']); ?></td>
-            <td><?php echo htmlspecialchars($paciente['nome']); ?></td>
-            <td><?php echo htmlspecialchars($paciente['email']); ?></td>
-            <td><?php echo htmlspecialchars($paciente['data_nascimento']); ?></td>
+    <div>
+      <div class="header-tables">
+        <h3 class="poppins-semibold c11">Suas consultas</h3>
+      </div>
+      <table class="active">
+        <thead>
+          <tr class="c01 poppins-medium">
+            <th class="first">#</th>
+            <th>Data da Consulta</th>
+            <th>Horário</th>
+            <th class="last">Médico</th>
           </tr>
-        <?php endforeach; ?>
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          <?php foreach ($consultas as $consulta) : ?>
+          <tr class="registro roboto-regular">
+            <td><?php echo htmlspecialchars($consulta['id']); ?></td>
+            <td><?php echo htmlspecialchars($consulta['data_consulta']); ?></td>
+            <td><?php echo htmlspecialchars($consulta['horario_consulta']); ?></td>
+            <td><?php echo htmlspecialchars($consulta['medico_crm']); ?></td>
+          </tr>
+          <?php endforeach; ?>
+        </tbody>
+      </table>
 
-  </div>
+    </div>
 
-  <script type="module" src="../public/scripts/main.js"></script>
+    <script type="module" src="../public/scripts/main.js"></script>
 
 </body>
 

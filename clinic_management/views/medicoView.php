@@ -8,12 +8,14 @@ session_start();
 
 $crm = $_SESSION['crm'];
 
+// var_dump($crm);
+
 $medico = new Medico(null, null, null, null, null);
 $medicos = $medico->getAll();
 $consultas = $medico->getConsultas($crm);
 
-$paciente = new Paciente(null, null, null, null, null);
-$pacientes = $paciente->getAll();
+// $paciente = new Paciente(null, null, null, null, null);
+// $pacientes = $paciente->getAll();
 
 $medicoName = $_SESSION['nome'];
 ?>
@@ -43,48 +45,15 @@ $medicoName = $_SESSION['nome'];
   <div class="container">
     <h1 class="wellcome-title poppins-semibold c11">Bem vindo, <?php echo htmlspecialchars($medicoName); ?></h1>
 
-    <div class="tables-change-btns">
-      <button class="poppins-semibold c01 active">Ver Pacientes</button>
-      <button class="poppins-semibold c01">Ver Consultas</button>
-    </div>
-
+    <h3 class="poppins-semibold c11">Lista de consultas</h3>
     <table class="tab active">
-      <thead>
-        <tr class="c01 poppins-medium">
-          <th class="first">#</th>
-          <th>Nome</th>
-          <th>Email</th>
-          <th>Data Nasc.</th>
-          <th>Sexo</th>
-          <th class="last">Ações</th>
-        </tr>
-      </thead>
-      <tbody>
-        <?php foreach ($pacientes as $paciente) : ?>
-        <tr class="registro roboto-regular">
-          <td><?php echo htmlspecialchars($paciente['id']); ?></td>
-          <td><?php echo htmlspecialchars($paciente['nome']); ?></td>
-          <td><?php echo htmlspecialchars($paciente['email']); ?></td>
-          <td><?php echo htmlspecialchars($paciente['data_nascimento']); ?></td>
-          <td><?php echo htmlspecialchars($paciente['sexo']); ?></td>
-          <td>
-            <form class="form-delete-table" method="post" action="/clinic_management/auth/readHistory.php">
-              <input type="hidden" name="id" value="<?php echo htmlspecialchars($paciente['id']); ?>">
-              <button class="roboto-regular c11" type="submit">Histórico</button>
-            </form>
-          </td>
-        </tr>
-        <?php endforeach; ?>
-      </tbody>
-    </table>
-
-    <table class="tab">
       <thead>
         <tr class="c01 poppins-medium">
           <th class="first">#</th>
           <th>Data da Consulta</th>
           <th>Horário</th>
-          <th class="last">Paciente</th>
+          <th>Paciente</th>
+          <th class="last">Histórico</th>
         </tr>
       </thead>
       <tbody>
@@ -94,6 +63,12 @@ $medicoName = $_SESSION['nome'];
           <td><?php echo htmlspecialchars($consulta['data_consulta']); ?></td>
           <td><?php echo htmlspecialchars($consulta['horario_consulta']); ?></td>
           <td><?php echo htmlspecialchars($consulta['paciente_email']); ?></td>
+          <td>
+            <form class="form-delete-table" method="post" action="/clinic_management/auth/readHistory.php">
+              <input type="hidden" name="id" value="<?php echo htmlspecialchars($paciente['id']); ?>">
+              <button class="roboto-regular c11" type="submit">Histórico</button>
+            </form>
+          </td>
         </tr>
         <?php endforeach; ?>
       </tbody>

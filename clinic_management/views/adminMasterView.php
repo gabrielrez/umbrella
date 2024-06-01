@@ -4,10 +4,10 @@ require_once '../classes/AdminPadrao.php';
 
 session_start();
 
+$clinicName = $_SESSION['nome'];
+
 $adminPadrao = new AdminPadrao(null, null, null, null);
 $admins = $adminPadrao->getAll();
-
-$clinicName = $_SESSION['nome'];
 ?>
 
 <!DOCTYPE html>
@@ -82,6 +82,7 @@ $clinicName = $_SESSION['nome'];
             <label class="roboto-regular">Senha</label>
             <input type="password" class="roboto-regular" name="user_senha" placeholder="Senha*" required>
           </div>
+          <input type="hidden" name="clinica_id" value="<?php echo htmlspecialchars($_SESSION['id']); ?>">
           <button type="submit" class="sign-up-btn-modal poppins-semibold c01">Cadastrar</button>
         </form>
       </div>

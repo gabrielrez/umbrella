@@ -47,8 +47,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             header('Location: /clinic_management/views/medicoView.php');
             exit();
           case 'paciente':
-            $pacienteName = $user['nome'];
-            header('Location: /clinic_management/views/pacienteView.php');
+            session_start();
+            $_SESSION['nome'] = $user['nome'];
+            $_SESSION['email'] = $user['email'];
+            header('Location: /clinic_management/views/pacienteView.php?pacienteName=' . urlencode($pacienteName));
             exit();
         }
       } else {

@@ -5,25 +5,20 @@ class Medico extends User
 {
 
   public $especialidade;
-  public $CRM;
+  public $crm;
 
-  public function __construct($username, $email, $especialidade, $CRM, $password)
+  public function __construct($username, $email, $especialidade, $crm, $password)
   {
     parent::__construct($username, $email, $password, 'Médico');
     $this->especialidade = $especialidade;
-    $this->CRM = $CRM;
-  }
-
-  public function getPermissions()
-  {
-    return ['view_pacientes', 'view_agendamentos'];
+    $this->crm = $crm;
   }
 
   public function cadastrar()
   {
     try {
       $conn = Database::getHefestos();
-      $medico = ['nome' => $this->username, 'email' => $this->email, 'especialidade' => $this->especialidade, 'crm' => $this->CRM, 'senha' => password_hash($this->password, PASSWORD_BCRYPT), 'tipo' => 'Médico'];
+      $medico = ['nome' => $this->username, 'email' => $this->email, 'especialidade' => $this->especialidade, 'crm' => $this->crm, 'senha' => password_hash($this->password, PASSWORD_BCRYPT), 'tipo' => 'Médico'];
       $conn->tabela('medico')->insert($medico);
     } catch (PDOException $e) {
       die("Error: " . $e->getMessage());
@@ -50,11 +45,13 @@ class Medico extends User
     }
   }
 
-  public function getConsultas($CRM)
+  public function getConsultas($crm)
   {
     try {
-      $conn = Database::getHefestos();
-      return $conn->tabela('consulta')->where($CRM)->buscarTodos();
+      $conn = Database::getConn();
+      $stmt = $conn->prepare("SELECT * FROM consulta WHERE medico_crm = ?");
+      $stmt->execute([$crm]);
+      return $stmt->fetchAll(PDO::FETCH_ASSOC);
     } catch (PDOException $e) {
       die("Error: " . $e->getMessage());
     }

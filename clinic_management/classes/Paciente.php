@@ -14,11 +14,6 @@ class Paciente extends User
     $this->sexo = $sexo;
   }
 
-  public function getPermissions()
-  {
-    return ['view_historico', 'view_agendamentos'];
-  }
-
   public function cadastrar()
   {
     try {
@@ -45,6 +40,18 @@ class Paciente extends User
     try {
       $conn = Database::getHefestos();
       return $conn->tabela('paciente')->buscarTodos();
+    } catch (PDOException $e) {
+      die("Error: " . $e->getMessage());
+    }
+  }
+
+  public function getConsultas($email)
+  {
+    try {
+      $conn = Database::getConn();
+      $stmt = $conn->prepare("SELECT * FROM consulta WHERE paciente_email = ?");
+      $stmt->execute([$email]);
+      return $stmt->fetchAll(PDO::FETCH_ASSOC);
     } catch (PDOException $e) {
       die("Error: " . $e->getMessage());
     }
