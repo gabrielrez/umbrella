@@ -31,6 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $clinicName = $user['nome'];
             session_start();
             $_SESSION['nome'] = $clinicName;
+            $_SESSION['id'] = $user['id'];
             header('Location: /clinic_management/views/adminMasterView.php?clinicName=' . urlencode($clinicName));
             exit();
           case 'admin':
@@ -47,6 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             header('Location: /clinic_management/views/medicoView.php');
             exit();
           case 'paciente':
+            $pacienteName = $user['nome'];
             session_start();
             $_SESSION['nome'] = $user['nome'];
             $_SESSION['email'] = $user['email'];
