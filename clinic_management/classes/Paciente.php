@@ -6,19 +6,29 @@ class Paciente extends User
 
   public $age;
   public $sexo;
+  public $clinicaId;
 
-  public function __construct($username, $email, $age, $sexo, $password)
+  public function __construct($username, $email, $age, $sexo, $password, $clinicaId)
   {
     parent::__construct($username, $email, $password, 'paciente');
     $this->age = $age;
     $this->sexo = $sexo;
+    $this->clinicaId = $clinicaId;
   }
 
   public function cadastrar()
   {
     try {
       $conn = Database::getHefestos();
-      $paciente = ['nome' => $this->username, 'email' => $this->email, 'data_nascimento' => $this->age, 'sexo' => $this->sexo, 'senha' => password_hash($this->password, PASSWORD_BCRYPT), 'tipo' => 'Paciente'];
+      $paciente = [
+        'nome' => $this->username,
+        'email' => $this->email,
+        'data_nascimento' => $this->age,
+        'sexo' => $this->sexo,
+        'senha' => password_hash($this->password, PASSWORD_BCRYPT),
+        'clinica_id' => $this->clinicaId,
+        'tipo' => 'Paciente'
+      ];
       $conn->tabela('paciente')->insert($paciente);
     } catch (PDOException $e) {
       die("Error: " . $e->getMessage());

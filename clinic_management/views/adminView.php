@@ -6,9 +6,11 @@ require_once '../classes/Consulta.php';
 
 session_start();
 
-$clinicaId = $_SESSION['clinica_id'];
+$clinicaId = $_SESSION['id'];
 
-$paciente = new Paciente(null, null, null, null, null);
+// var_dump($clinicaId);
+
+$paciente = new Paciente(null, null, null, null, null, null);
 $pacientes = $paciente->getAll($clinicaId);
 
 $medico = new Medico(null, null, null, null, null);
@@ -72,6 +74,7 @@ $adminName = $_SESSION['nome'];
           <label class="roboto-regular">Senha</label>
           <input type="password" class="roboto-regular" name="paciente_senha" placeholder="Senha*" required>
         </div>
+        <input type="hidden" name="clinica_id" value="<?php echo htmlspecialchars($_SESSION['id']); ?>">
         <button type="submit" class="sign-up-btn-modal poppins-semibold c01">Cadastrar</button>
       </form>
 

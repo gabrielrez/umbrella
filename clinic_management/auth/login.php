@@ -36,10 +36,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             exit();
           case 'admin':
             $adminName = $user['nome'];
-            $clinicaId = $user['clinica_id'];
             session_start();
             $_SESSION['nome'] = $adminName;
-            $_SESSION['clinica_id'] = $clinicaId;
+            $_SESSION['id'] = $user['clinica_id'];
             header('Location: /clinic_management/views/adminView.php?adminName=' . urlencode($adminName));
             exit();
           case 'medico':
