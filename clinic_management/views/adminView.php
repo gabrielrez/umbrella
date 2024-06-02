@@ -13,7 +13,7 @@ $clinicaId = $_SESSION['id'];
 $paciente = new Paciente(null, null, null, null, null, null);
 $pacientes = $paciente->getAll($clinicaId);
 
-$medico = new Medico(null, null, null, null, null);
+$medico = new Medico(null, null, null, null, null, null);
 $medicos = $medico->getAll($clinicaId);
 
 $consulta = new Consulta(null, null, null, null);
@@ -100,6 +100,7 @@ $adminName = $_SESSION['nome'];
           <label class="roboto-regular">Senha</label>
           <input type="password" class="roboto-regular" name="medico_senha" placeholder="Senha*" required>
         </div>
+        <input type="hidden" name="clinica_id" value="<?php echo htmlspecialchars($_SESSION['id']); ?>">
         <button type="submit" class="sign-up-btn-modal poppins-semibold c01">Cadastrar</button>
       </form>
     </div>

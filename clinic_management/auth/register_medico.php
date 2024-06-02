@@ -8,9 +8,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $medicoEspecialidade = filter_input(INPUT_POST, 'medico_especialidade');
   $medicoCRM = filter_input(INPUT_POST, 'medico_crm');
   $medicoPassword = $_POST['medico_senha'];
+  $clinicaId = filter_input(INPUT_POST, 'clinica_id');
 
   if ($medicoName && $medicoEmail && $medicoEspecialidade && $medicoPassword) {
-    $medico = new Medico($medicoName, $medicoEmail, $medicoEspecialidade, $medicoCRM, $medicoPassword);
+    $medico = new Medico($medicoName, $medicoEmail, $medicoEspecialidade, $medicoCRM, $medicoPassword, $clinicaId);
     $medico->cadastrar();
     header('Location: /clinic_management/views/adminView.php?adminName=' . urlencode($adminName));
   } else {
