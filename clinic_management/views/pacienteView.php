@@ -10,10 +10,11 @@ $pacienteName = $_SESSION['nome'];
 $pacienteEmail = $_SESSION['email'];
 $pacienteDt = $_SESSION['data_nascimento'];
 $pacienteSexo = $_SESSION['sexo'];
+$clinicaId = $_SESSION['id'];
 
 // var_dump($_SESSION);
 
-$paciente = new Paciente(null, null, null, null, null);
+$paciente = new Paciente(null, null, null, null, null, null);
 $consultas = $paciente->getConsultas($pacienteEmail);
 ?>
 

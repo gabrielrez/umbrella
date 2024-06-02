@@ -23,10 +23,10 @@ class Clinica extends User
     }
   }
 
-  public function getAll()
+  public function getAll($id)
   {
     $conn = Database::getHefestos();
-    return $conn->tabela('clinic')->todos();
+    return $conn->tabela('clinic')->where(['id' => $id])->todos();
   }
 
   public function delete($id)

@@ -34,10 +34,10 @@ $admins = $adminPadrao->getAll($clinicaId);
   <div class="container">
     <h1 class="wellcome-title poppins-semibold c11"><?php echo htmlspecialchars($clinicName); ?></h1>
 
-    <button class="create-btn open-modal-btn poppins-semibold c01">Cadastrar Usuário</button>
+    <button class="create-btn open-modal-btn poppins-semibold c01">Cadastrar Admin</button>
 
     <div>
-      <h3 class="poppins-semibold c11">Lista de Usuários</h3>
+      <h3 class="poppins-semibold c11">Lista de Admins</h3>
       <table>
         <thead>
           <tr class="c01 poppins-medium">
@@ -49,17 +49,17 @@ $admins = $adminPadrao->getAll($clinicaId);
         </thead>
         <tbody>
           <?php foreach ($admins as $admin) : ?>
-          <tr class="registro roboto-regular">
-            <td><?php echo htmlspecialchars($admin['id']); ?></td>
-            <td><?php echo htmlspecialchars($admin['nome']); ?></td>
-            <td><?php echo htmlspecialchars($admin['email']); ?></td>
-            <td>
-              <form class="form-delete-table" method="post" action="/clinic_management/auth/delete_admin.php" onsubmit="return confirm('Você tem certeza que deseja excluir este admin?');">
-                <input type="hidden" name="id" value="<?php echo htmlspecialchars($admin['id']); ?>">
-                <button class="roboto-regular c11" type="submit">Excluir</button>
-              </form>
-            </td>
-          </tr>
+            <tr class="registro roboto-regular">
+              <td><?php echo htmlspecialchars($admin['id']); ?></td>
+              <td><?php echo htmlspecialchars($admin['nome']); ?></td>
+              <td><?php echo htmlspecialchars($admin['email']); ?></td>
+              <td>
+                <form class="form-delete-table" method="post" action="/clinic_management/auth/delete_admin.php" onsubmit="return confirm('Você tem certeza que deseja excluir este admin?');">
+                  <input type="hidden" name="id" value="<?php echo htmlspecialchars($admin['id']); ?>">
+                  <button class="roboto-regular c11" type="submit">Excluir</button>
+                </form>
+              </td>
+            </tr>
           <?php endforeach; ?>
         </tbody>
       </table>

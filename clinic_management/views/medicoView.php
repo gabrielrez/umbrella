@@ -7,11 +7,12 @@ require_once '../classes/Consulta.php';
 session_start();
 
 $crm = $_SESSION['crm'];
+$clinicaId = $_SESSION['id'];
 
 // var_dump($crm);
 
-$medico = new Medico(null, null, null, null, null);
-$medicos = $medico->getAll();
+$medico = new Medico(null, null, null, null, null, null);
+$medicos = $medico->getAll($clinicaId);
 $consultas = $medico->getConsultas($crm);
 
 // $paciente = new Paciente(null, null, null, null, null);
@@ -58,18 +59,18 @@ $medicoName = $_SESSION['nome'];
       </thead>
       <tbody>
         <?php foreach ($consultas as $consulta) : ?>
-        <tr class="registro roboto-regular">
-          <td><?php echo htmlspecialchars($consulta['id']); ?></td>
-          <td><?php echo htmlspecialchars($consulta['data_consulta']); ?></td>
-          <td><?php echo htmlspecialchars($consulta['horario_consulta']); ?></td>
-          <td><?php echo htmlspecialchars($consulta['paciente_email']); ?></td>
-          <td>
-            <form class="form-delete-table" method="post" action="/clinic_management/auth/readHistory.php">
-              <input type="hidden" name="id" value="<?php echo htmlspecialchars($paciente['id']); ?>">
-              <button class="roboto-regular c11" type="submit">Histórico</button>
-            </form>
-          </td>
-        </tr>
+          <tr class="registro roboto-regular">
+            <td><?php echo htmlspecialchars($consulta['id']); ?></td>
+            <td><?php echo htmlspecialchars($consulta['data_consulta']); ?></td>
+            <td><?php echo htmlspecialchars($consulta['horario_consulta']); ?></td>
+            <td><?php echo htmlspecialchars($consulta['paciente_email']); ?></td>
+            <td>
+              <form class="form-delete-table" method="post" action="/clinic_management/auth/readHistory.php">
+                <input type="hidden" name="id" value="<?php echo htmlspecialchars($paciente['id']); ?>">
+                <button class="roboto-regular c11" type="submit">Histórico</button>
+              </form>
+            </td>
+          </tr>
         <?php endforeach; ?>
       </tbody>
     </table>

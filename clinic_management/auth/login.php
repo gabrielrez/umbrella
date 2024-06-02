@@ -43,10 +43,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             exit();
           case 'medico':
             $medicoName = $user['nome'];
-            $clinicaId = $user['clinica_id'];
             session_start();
             $_SESSION['nome'] = $medicoName;
             $_SESSION['crm'] = $user['crm'];
+            $_SESSION['id'] = $user['clinica_id'];
             header('Location: /clinic_management/views/medicoView.php');
             exit();
           case 'paciente':
@@ -59,12 +59,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['email'] = $user['email'];
             $_SESSION['data_nascimento'] = $user['data_nascimento'];
             $_SESSION['sexo'] = $user['sexo'];
+            $_SESSION['id'] = $user['clinica_id'];
             header('Location: /clinic_management/views/pacienteView.php?pacienteName=' . urlencode($pacienteName));
             exit();
         }
       } else {
-        header('Location: /clinic_management/views/loginView.php');
+        // header('Location: /clinic_management/views/loginView.php');
         $error = "Credenciais inválidas. Por favor, tente novamente.";
+        echo $error;
       }
     } catch (Exception $e) {
       die("Ocorreu um erro no servidor: " . $e->getMessage());

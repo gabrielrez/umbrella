@@ -33,7 +33,7 @@
     <div class="home">
       <div class="home-content">
         <h1 class="home-title poppins-semibold c11">Inove na Gestão<br>da sua Clínica<span class="detail">.</span></h1>
-        <p class="home-text roboto-regular c10">Agende consultas, gerencie pacientes, acompanhe registros médicos e controle finanças de forma integrada e segura.</p>
+        <p class="home-text roboto-regular c10">Agende consultas, gerencie pacientes, acompanhe registros médicos e controle sua clínica de forma integrada e segura.</p>
         <a class="home-btn poppins-semibold c01" href="/clinic_management/views/cadastroView.php">COMEÇAR AGORA</a>
       </div>
       <img class="home-img" src="/clinic_management/public/midia//img/home-img.png" alt="Site Umbrella por dentro">

@@ -7,20 +7,28 @@ class Consulta
   public $pacienteEmail;
   public $data;
   public $horario;
+  public $clinicaId;
 
-  public function __construct($pacienteEmail, $medicoCRM, $data, $horario)
+  public function __construct($pacienteEmail, $medicoCRM, $data, $horario, $clinicaId)
   {
     $this->pacienteEmail = $pacienteEmail;
     $this->medicoCRM = $medicoCRM;
     $this->data = $data;
     $this->horario = $horario;
+    $this->clinicaId = $clinicaId;
   }
 
   public function create()
   {
     try {
       $conn = Database::getHefestos();
-      $consulta = ['paciente_email' => $this->pacienteEmail, 'medico_crm' => $this->medicoCRM, 'data_consulta' => $this->data, 'horario_consulta' => $this->horario];
+      $consulta = [
+        'paciente_email' => $this->pacienteEmail,
+        'medico_crm' => $this->medicoCRM,
+        'data_consulta' => $this->data,
+        'horario_consulta' => $this->horario,
+        'clinica_id' => $this->clinicaId
+      ];
       $conn->tabela('consulta')->insert($consulta);
     } catch (PDOException $e) {
       die("Error: " . $e->getMessage());

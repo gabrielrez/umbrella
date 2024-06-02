@@ -117,6 +117,9 @@ li {
 
 .info-container ul li {
   margin: 16px 0px;
+  padding: 16px;
+  border-radius: 8px;
+  background-color: var(--c01);
 }
 
 button {
