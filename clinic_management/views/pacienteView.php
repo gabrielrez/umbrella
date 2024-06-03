@@ -59,12 +59,12 @@ $consultas = $paciente->getConsultas($pacienteEmail);
         </thead>
         <tbody>
           <?php foreach ($consultas as $consulta) : ?>
-          <tr class="registro roboto-regular">
-            <td><?php echo htmlspecialchars($consulta['id']); ?></td>
-            <td><?php echo htmlspecialchars($consulta['data_consulta']); ?></td>
-            <td><?php echo htmlspecialchars($consulta['horario_consulta']); ?></td>
-            <td><?php echo htmlspecialchars($consulta['medico_crm']); ?></td>
-          </tr>
+            <tr class="registro roboto-regular">
+              <td><?php echo htmlspecialchars($consulta['id']); ?></td>
+              <td><?php echo htmlspecialchars($consulta['data_consulta']); ?></td>
+              <td><?php echo htmlspecialchars($consulta['horario_consulta']); ?></td>
+              <td><?php echo htmlspecialchars($consulta['medico_crm']); ?></td>
+            </tr>
           <?php endforeach; ?>
         </tbody>
       </table>
